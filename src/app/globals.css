@@ -18,13 +18,13 @@
 [data-theme="light"] {
   .primary-btn {
     background-color: var(--primary);
-    border-color: var(--primary);
+    border-color: transparent;
     color: var(--primary-content);
     font-weight: 400;
   }
   .primary-btn:hover {
     background-color: color-mix(in srgb, var(--primary) 80%, transparent);
-    border-color: color-mix(in srgb, var(--primary) 80%, transparent);
+    border-color: transparent;
   }
 }
 
@@ -39,6 +39,7 @@
   --base-content: #30313d;
   --base-content-secondary: #5c5b61;
   --primary: #4b92db;
+  --primary-80: rgb(75, 146, 219, 0.8);
   --primary-content: #ffffff;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -148,8 +149,5 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
