@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,8 +13,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ContinueWithGoogle from "./continue-with-google";
 import Link from "next/link";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 export function LoginForm({ className, ...props }) {
+  const [showPass, setShowPass] = useState(false);
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -51,7 +56,24 @@ export function LoginForm({ className, ...props }) {
                       Forgot your password?
                     </a>
                   </div>
-                  <Input id="password" type="password" required />
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type={showPass ? "text" : "password"}
+                      required
+                    />
+                    <button
+                      className="absolute right-0 top-0 p-2 cursor-pointer"
+                      onClick={() => setShowPass(!showPass)}
+                      type="button"
+                    >
+                      {showPass ? (
+                        <Eye className="w-5 h-5 stroke-base-content-secondary" />
+                      ) : (
+                        <EyeOff className="w-5 h-5 stroke-base-content-secondary" />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <Button type="submit" className="w-full">
                   Login
