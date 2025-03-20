@@ -22,21 +22,25 @@ export function SignUpForm({ className, ...props }) {
   const [showPassVerification, setShowPassVerification] = useState(false);
   const [changeHasUppercase, setChangeHasUppercase] = useState(false);
   const [changeHasLowercase, setChangeHasLowercase] = useState(false);
+  const [changeHasNumber, setChangeHasNumber] = useState(false);
   const [changeHasMinimumLength, setChangeHasMinimumLength] = useState(false);
 
   const passVerificationHandler = (e) => {
     const password = e.target.value;
     const hasUppercase = /[A-Z]/;
     const hasLowercase = /[a-z]/;
+    const hasNumber = /[0-9]/;
     const hasMinimumLength = /^.{8,15}$/;
 
     setChangeHasUppercase(hasUppercase.test(password));
     setChangeHasLowercase(hasLowercase.test(password));
+    setChangeHasNumber(hasNumber.test(password));
     setChangeHasMinimumLength(hasMinimumLength.test(password));
 
     if (
       hasUppercase.test(password) &&
       hasLowercase.test(password) &&
+      hasNumber.test(password) &&
       hasMinimumLength.test(password)
     ) {
       return setIsDisabled(false);
@@ -122,26 +126,29 @@ export function SignUpForm({ className, ...props }) {
                     <ul className="text-sm">
                       <li
                         className={`${
-                          changeHasUppercase
-                            ? "text-emerald-500"
-                            : "text-rose-500"
+                          changeHasUppercase ? "text-primary" : "text-rose-500"
                         }`}
                       >
                         Must have an Uppercase letter
                       </li>
                       <li
                         className={`${
-                          changeHasLowercase
-                            ? "text-emerald-500"
-                            : "text-rose-500"
+                          changeHasLowercase ? "text-primary" : "text-rose-500"
                         }`}
                       >
                         Must have a Lowercase letter
                       </li>
                       <li
                         className={`${
+                          changeHasNumber ? "text-primary" : "text-rose-500"
+                        }`}
+                      >
+                        Must contain at least one number
+                      </li>
+                      <li
+                        className={`${
                           changeHasMinimumLength
-                            ? "text-emerald-500"
+                            ? "text-primary"
                             : "text-rose-500"
                         }`}
                       >
