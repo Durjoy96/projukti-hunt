@@ -15,19 +15,6 @@
   --color-primary-content: var(--primary-content);
 }
 
-[data-theme="light"] {
-  .primary-btn {
-    background-color: var(--primary);
-    border-color: transparent;
-    color: var(--primary-content);
-    font-weight: 400;
-  }
-  .primary-btn:hover {
-    background-color: color-mix(in srgb, var(--primary) 80%, transparent);
-    border-color: transparent;
-  }
-}
-
 @theme {
   --font-inter: "Inter", sans-serif;
 }

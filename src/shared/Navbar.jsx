@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <>
@@ -70,7 +73,9 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn primary-btn">Sign Up</a>
+          <Link href="/auth/sign-up">
+            <Button>Sign Up</Button>
+          </Link>
         </div>
       </div>
     </>
