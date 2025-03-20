@@ -17,6 +17,7 @@
 
 @theme {
   --font-inter: "Inter", sans-serif;
+  --color-base-content-secondary: var(--base-content-secondary);
 }
 
 :root {

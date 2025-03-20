@@ -63,7 +63,7 @@ export function LoginForm({ className, ...props }) {
                   href="/auth/sign-up"
                   className="underline underline-offset-4"
                 >
-                  Sign up
+                  Sign Up
                 </Link>
               </div>
             </div>
