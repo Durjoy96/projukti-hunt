@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/shared/Navbar";
+import AuthProvider from "@/components/AuthProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,12 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
       <body className={`${inter.variable} antialiased font-inter bg-base-200`}>
-        <header className="sticky top-0 z-50">
-          <nav className="bg-base-100 shadow-sm">
-            <Navbar />
-          </nav>
-        </header>
-        {children}
+        <AuthProvider>
+          <header className="sticky top-0 z-50">
+            <nav className="bg-base-100 shadow-sm">
+              <Navbar />
+            </nav>
+          </header>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
