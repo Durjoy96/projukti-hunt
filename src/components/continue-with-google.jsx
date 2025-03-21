@@ -1,13 +1,30 @@
 "use client";
 
+import toast from "react-hot-toast";
 import { useAuth } from "./AuthProvider";
 import { Button } from "./ui/button";
+import axios from "axios";
 
 export default function ContinueWithGoogle() {
   const { googleLogin } = useAuth();
+  const btnHandler = () => {
+    googleLogin()
+      .then((res) => {
+        toast.success("Login Successfully!");
+        const user = {
+          _id: res.user.uid,
+          name: res.user.displayName,
+          email: res.user.email,
+          photo_url: res.user.photoURL,
+          creation_time: res.user.metadata.creationTime,
+        };
+        axios.post("/api/auth/users", user); //store user data to the database
+      })
+      .catch((error) => toast.error(error.message));
+  };
   return (
     <Button
-      onClick={googleLogin}
+      onClick={btnHandler}
       variant="outline"
       className="w-full cursor-pointer"
       type="button"

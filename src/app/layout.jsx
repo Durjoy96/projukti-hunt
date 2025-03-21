@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/shared/Navbar";
 import AuthProvider from "@/components/AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,6 +25,14 @@ export default function RootLayout({ children }) {
             </nav>
           </header>
           {children}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                marginTop: "4rem",
+              },
+            }}
+          />
         </AuthProvider>
       </body>
     </html>
