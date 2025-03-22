@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/shared/Navbar";
+import Navbar from "@/shared/Navbar/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import { Toaster } from "react-hot-toast";
 

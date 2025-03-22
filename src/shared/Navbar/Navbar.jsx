@@ -1,5 +1,7 @@
+import SignInModal from "@/components/sign-in-modal";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import NavEnd from "./NavEnd";
 
 export default function Navbar() {
   return (
@@ -72,12 +74,9 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <div className="navbar-end">
-          <Link href="/auth/sign-up">
-            <Button>Sign Up</Button>
-          </Link>
-        </div>
+        <NavEnd />
       </div>
+      <SignInModal />
     </>
   );
 }
