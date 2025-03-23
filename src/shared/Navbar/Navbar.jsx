@@ -1,6 +1,4 @@
 import SignInModal from "@/components/sign-in-modal";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import NavEnd from "./NavEnd";
 
 export default function Navbar() {
@@ -49,7 +47,9 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <a className="text-xl font-medium">daisyUI</a>
+          <a className="text-xl font-medium">
+            <span className="text-primary">Porjukti</span>Hunt
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

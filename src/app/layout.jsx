@@ -17,7 +17,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
-      <body className={`${inter.variable} antialiased font-inter bg-base-200`}>
+      <body
+        className={`${inter.variable} antialiased font-inter bg-base-200 min-h-screen`}
+      >
         <AuthProvider>
           <header className="sticky top-0 z-50">
             <nav className="bg-base-100 shadow-sm">
