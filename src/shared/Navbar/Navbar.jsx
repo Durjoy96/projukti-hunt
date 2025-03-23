@@ -1,5 +1,6 @@
 import SignInModal from "@/components/sign-in-modal";
 import NavEnd from "./NavEnd";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -47,9 +48,9 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <a className="text-xl font-medium">
+          <Link href="/" className="text-xl font-medium">
             <span className="text-primary">Porjukti</span>Hunt
-          </a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

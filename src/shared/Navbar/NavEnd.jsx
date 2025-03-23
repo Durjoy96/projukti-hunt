@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/components/AuthProvider";
 import { CirclePlus, LogIn } from "lucide-react";
+import Link from "next/link";
 
 export default function NavbarEnd() {
   const { user, logout } = useAuth();
@@ -23,10 +24,12 @@ export default function NavbarEnd() {
       <div className="navbar-end">
         {user ? (
           <div className="flex items-center gap-6">
-            <Button variant="outline" className="text-base-content">
-              {" "}
-              <CirclePlus /> Submit
-            </Button>
+            <Link href="/posts/new">
+              <Button variant="outline" className="text-base-content">
+                {" "}
+                <CirclePlus /> Submit
+              </Button>
+            </Link>
             <DropdownMenu>
               <DropdownMenuTrigger>
                 {" "}
