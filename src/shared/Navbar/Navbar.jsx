@@ -49,7 +49,7 @@ export default function Navbar() {
             </ul>
           </div>
           <Link href="/" className="text-xl font-medium">
-            <span className="text-primary">Porjukti</span>Hunt
+            <span className="text-primary">Projukti</span>Hunt
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">

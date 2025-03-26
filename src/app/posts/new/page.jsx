@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import BasicInformation from "./components/BasicInformation";
 import CommunityAndSocialLinks from "./components/CommunityAndSocialLinks";
@@ -8,6 +7,17 @@ import AdditionalFeatures from "./components/AdditionalFeatures";
 
 export default function SubmitProduct() {
   const [activeTab, setActiveTab] = useState("basic-information");
+  const [submissionInfo, setSubmissionInfo] = useState({
+    product_name: "",
+    tagline: "",
+    description: "",
+    logo: "",
+    preview_logo: null,
+    preview_banner_1: null,
+    preview_banner_2: null,
+    preview_banner_3: null,
+  });
+  console.log(submissionInfo);
   return (
     <>
       <section className="max-w-7xl mx-auto px-5 mt-12 md:mt-20 grid grid-cols-[0.3fr_1fr] gap-12">
@@ -41,7 +51,12 @@ export default function SubmitProduct() {
           </button>
         </div>
         <div>
-          {activeTab === "basic-information" && <BasicInformation />}
+          {activeTab === "basic-information" && (
+            <BasicInformation
+              setSubmissionInfo={setSubmissionInfo}
+              submissionInfo={submissionInfo}
+            />
+          )}
           {activeTab === "community-social-links" && (
             <CommunityAndSocialLinks />
           )}
