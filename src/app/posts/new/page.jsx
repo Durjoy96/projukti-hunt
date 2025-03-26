@@ -16,6 +16,7 @@ export default function SubmitProduct() {
     preview_banner_1: null,
     preview_banner_2: null,
     preview_banner_3: null,
+    web_app_link: "https://",
   });
   console.log(submissionInfo);
   return (

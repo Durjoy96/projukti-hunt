@@ -109,6 +109,24 @@ export default function BasicInformation({
                   }
                 />
               </div>
+              {/* Website or App Link */}
+              <div className="grid gap-2 max-w-lg">
+                <Label htmlFor="web_app_link">Website or App Link</Label>
+                <Input
+                  id="web_app_link"
+                  type="Link"
+                  placeholder="https://"
+                  className="bg-base-100"
+                  required
+                  defaultValue={submissionInfo.web_app_link}
+                  onChange={(e) =>
+                    setSubmissionInfo({
+                      ...submissionInfo,
+                      web_app_link: e.target.value,
+                    })
+                  }
+                />
+              </div>
               {/* logo */}
               <div>
                 <Label htmlFor="logo">Product Logo</Label>
