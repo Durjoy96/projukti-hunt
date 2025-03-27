@@ -39,15 +39,19 @@ export default function Categories({ submissionInfo, setSubmissionInfo }) {
     <>
       <Label htmlFor="web_app_link">Category</Label>
       <Select onValueChange={ValueChangeHandler}>
-        <SelectTrigger className="w-full bg-base-100">
-          <SelectValue placeholder="Select a timezone" />
+        <SelectTrigger className="w-full bg-base-100 cursor-pointer">
+          <SelectValue placeholder="Select a category" />
         </SelectTrigger>
         <SelectContent>
           {categories.map((category, idx) => (
             <SelectGroup key={idx}>
               <SelectLabel>{category.category}</SelectLabel>
               {category.subcategories.map((subcategory, idx) => (
-                <SelectItem value={subcategory} key={idx}>
+                <SelectItem
+                  value={subcategory}
+                  key={idx}
+                  className="cursor-pointer"
+                >
                   {subcategory}
                 </SelectItem>
               ))}
