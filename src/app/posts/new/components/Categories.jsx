@@ -51,7 +51,7 @@ export default function Categories({ submissionInfo, setSubmissionInfo }) {
                   value={subcategory}
                   key={idx}
                   className="cursor-pointer"
-                >
+                >   
                   {subcategory}
                 </SelectItem>
               ))}

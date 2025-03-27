@@ -4,6 +4,7 @@ import { useState } from "react";
 import BasicInformation from "./components/BasicInformation";
 import CommunityAndSocialLinks from "./components/CommunityAndSocialLinks";
 import AdditionalFeatures from "./components/AdditionalFeatures";
+import { Button } from "@/components/ui/button";
 
 export default function SubmitProduct() {
   const [activeTab, setActiveTab] = useState("basic-information");
@@ -64,6 +65,15 @@ export default function SubmitProduct() {
             <CommunityAndSocialLinks />
           )}
           {activeTab === "additional-features" && <AdditionalFeatures />}
+          <div className="mt-12 flex justify-end">
+            <Button
+              variant="outline"
+              onClick={() => setActiveTab("community-social-links")}
+            >
+              Next:{" "}
+              {activeTab === "basic-information" && "Community & Social Links"}
+            </Button>
+          </div>
         </div>
       </section>
     </>
