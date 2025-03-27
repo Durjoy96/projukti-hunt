@@ -1,0 +1,101 @@
+[
+  {
+    "category": "Tech & Software",
+    "subcategories": [
+      "SaaS & B2B Tools",
+      "Mobile Apps",
+      "AI & Automation",
+      "Productivity Tools",
+      "Web Development & Design",
+      "Fintech & Payments",
+      "Cybersecurity",
+      "Open Source Projects"
+    ]
+  },
+  {
+    "category": "E-commerce & Shopping",
+    "subcategories": [
+      "Online Stores & Marketplaces",
+      "Fashion & Apparel",
+      "Handicrafts & Local Products",
+      "Home & Lifestyle",
+      "Food & Beverages"
+    ]
+  },
+  {
+    "category": "Finance & Investment",
+    "subcategories": [
+      "Personal Finance",
+      "Crypto & Web3",
+      "Stock Market & Trading",
+      "Loan & Credit Services"
+    ]
+  },
+  {
+    "category": "Startups & Entrepreneurship",
+    "subcategories": [
+      "Local Startups",
+      "Business Services",
+      "Co-working Spaces",
+      "Funding & Investors"
+    ]
+  },
+  {
+    "category": "Education & Learning",
+    "subcategories": [
+      "Online Courses & EdTech",
+      "Language Learning",
+      "Skill Development",
+      "College & School Resources"
+    ]
+  },
+  {
+    "category": "Jobs & Career",
+    "subcategories": [
+      "Job Boards & Hiring Platforms",
+      "Freelancing & Remote Work",
+      "Resume & Interview Prep"
+    ]
+  },
+  {
+    "category": "Entertainment & Media",
+    "subcategories": [
+      "Streaming Services",
+      "Podcasts & Audio Apps",
+      "News & Magazines",
+      "Social Media & Influencers"
+    ]
+  },
+  {
+    "category": "Health & Wellness",
+    "subcategories": [
+      "Telemedicine & Doctor Booking",
+      "Fitness & Diet",
+      "Mental Health"
+    ]
+  },
+  {
+    "category": "Environment & Agriculture",
+    "subcategories": [
+      "Organic & Sustainable Products",
+      "Farming & AgriTech",
+      "Gardening & Landscaping"
+    ]
+  },
+  {
+    "category": "Real Estate & Housing",
+    "subcategories": [
+      "Property Listings",
+      "Interior Design & Renovation",
+      "Rental & PG Services"
+    ]
+  },
+  {
+    "category": "Travel & Transportation",
+    "subcategories": [
+      "Ride-Sharing & Logistics",
+      "Flight & Hotel Booking",
+      "Local Travel Guides"
+    ]
+  }
+]
