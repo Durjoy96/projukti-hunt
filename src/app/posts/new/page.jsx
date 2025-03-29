@@ -5,6 +5,7 @@ import BasicInformation from "./components/BasicInformation";
 import CommunityAndSocialLinks from "./components/CommunityAndSocialLinks";
 import AdditionalFeatures from "./components/AdditionalFeatures";
 import { Button } from "@/components/ui/button";
+import LaunchChecklist from "./components/LaunchChecklist";
 
 export default function SubmitProduct() {
   const [activeTab, setActiveTab] = useState("basic-information");
@@ -25,6 +26,7 @@ export default function SubmitProduct() {
   return (
     <>
       <section className="max-w-7xl mx-auto px-5 mt-12 md:mt-20 grid grid-cols-[0.3fr_1fr] gap-12">
+        {/* sidebar */}
         <div className="flex flex-col gap-2">
           <button
             className={`text-left hover:bg-base-300 pl-4 py-3 rounded-lg text-base-content font-medium cursor-pointer ${
@@ -53,7 +55,17 @@ export default function SubmitProduct() {
           >
             Additional Features
           </button>
+          <button
+            className={`text-left hover:bg-base-300 pl-4 py-3 rounded-lg text-base-content font-medium cursor-pointer ${
+              activeTab === "launch-checklist" &&
+              "bg-primary/20 hover:bg-primary/20"
+            }`}
+            onClick={() => setActiveTab("launch-checklist")}
+          >
+            Launch Checklist
+          </button>
         </div>
+        {/* show the selected component */}
         <div>
           {activeTab === "basic-information" && (
             <BasicInformation
@@ -73,6 +85,13 @@ export default function SubmitProduct() {
               submissionInfo={submissionInfo}
             />
           )}
+          {activeTab === "launch-checklist" && (
+            <LaunchChecklist
+              setSubmissionInfo={setSubmissionInfo}
+              submissionInfo={submissionInfo}
+            />
+          )}
+          {/* Next Component Button */}
           <div className="mt-12 flex justify-start">
             {activeTab === "basic-information" && (
               <Button
@@ -88,6 +107,14 @@ export default function SubmitProduct() {
                 onClick={() => setActiveTab("additional-features")}
               >
                 Next: Additional Features
+              </Button>
+            )}
+            {activeTab === "additional-features" && (
+              <Button
+                variant="outline"
+                onClick={() => setActiveTab("launch-checklist")}
+              >
+                Next: Launch Checklist
               </Button>
             )}
           </div>
