@@ -67,7 +67,12 @@ export default function SubmitProduct() {
               submissionInfo={submissionInfo}
             />
           )}
-          {activeTab === "additional-features" && <AdditionalFeatures />}
+          {activeTab === "additional-features" && (
+            <AdditionalFeatures
+              setSubmissionInfo={setSubmissionInfo}
+              submissionInfo={submissionInfo}
+            />
+          )}
           <div className="mt-12 flex justify-start">
             {activeTab === "basic-information" && (
               <Button

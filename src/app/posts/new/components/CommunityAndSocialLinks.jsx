@@ -21,7 +21,7 @@ export default function CommunityAndSocialLinks({
           <form>
             <div className="grid gap-6">
               {/* maker or hunter */}
-              <div className="grid gap-2">
+              <div className="grid gap-3">
                 <h4 className="text-lg font-bold text-base-content">
                   Did you work on this product?
                 </h4>
