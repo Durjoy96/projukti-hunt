@@ -52,7 +52,7 @@ export default function BasicInformation({
             Tell us about your product
           </h2>
           <p className="text-sm font-normal text-base-content-secondary mt-2">
-            Every Bangladeshi people's is exited to hear from you
+            Every Bangladeshi people's are exited to hear from you
           </p>
         </div>
         <div className="mt-12">

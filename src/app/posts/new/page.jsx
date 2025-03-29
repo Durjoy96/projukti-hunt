@@ -62,17 +62,29 @@ export default function SubmitProduct() {
             />
           )}
           {activeTab === "community-social-links" && (
-            <CommunityAndSocialLinks />
+            <CommunityAndSocialLinks
+              setSubmissionInfo={setSubmissionInfo}
+              submissionInfo={submissionInfo}
+            />
           )}
           {activeTab === "additional-features" && <AdditionalFeatures />}
-          <div className="mt-12 flex justify-end">
-            <Button
-              variant="outline"
-              onClick={() => setActiveTab("community-social-links")}
-            >
-              Next:{" "}
-              {activeTab === "basic-information" && "Community & Social Links"}
-            </Button>
+          <div className="mt-12 flex justify-start">
+            {activeTab === "basic-information" && (
+              <Button
+                variant="outline"
+                onClick={() => setActiveTab("community-social-links")}
+              >
+                Next: Community & Social Links
+              </Button>
+            )}
+            {activeTab === "community-social-links" && (
+              <Button
+                variant="outline"
+                onClick={() => setActiveTab("additional-features")}
+              >
+                Next: Additional Features
+              </Button>
+            )}
           </div>
         </div>
       </section>
