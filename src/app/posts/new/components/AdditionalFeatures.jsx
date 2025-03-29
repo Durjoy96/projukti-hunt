@@ -21,6 +21,7 @@ export default function AdditionalFeatures({
                   name="pricing"
                   className="radio radio-primary bg-base-100"
                   id="free"
+                  defaultChecked={submissionInfo.pricing === "Free"}
                   onClick={() =>
                     setSubmissionInfo({
                       ...submissionInfo,
@@ -44,6 +45,7 @@ export default function AdditionalFeatures({
                   name="pricing"
                   className="radio radio-primary bg-base-100"
                   id="freemium"
+                  defaultChecked={submissionInfo.pricing === "Freemium"}
                   onClick={() =>
                     setSubmissionInfo({
                       ...submissionInfo,
@@ -68,6 +70,7 @@ export default function AdditionalFeatures({
                   name="pricing"
                   className="radio radio-primary bg-base-100"
                   id="paid"
+                  defaultChecked={submissionInfo.pricing === "Paid"}
                   onClick={() =>
                     setSubmissionInfo({
                       ...submissionInfo,

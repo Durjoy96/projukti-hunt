@@ -21,6 +21,8 @@ export default function SubmitProduct() {
     web_app_link: "https://",
     category: null,
     subcategory: null,
+    maker: true,
+    hunter: false,
   });
   console.log(submissionInfo);
   return (

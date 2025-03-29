@@ -30,8 +30,8 @@ export default function CommunityAndSocialLinks({
                     type="radio"
                     name="radio-1"
                     className="radio radio-primary bg-base-100"
-                    defaultChecked
                     id="radio-1"
+                    defaultChecked={submissionInfo.maker === true}
                     onClick={() =>
                       setSubmissionInfo({
                         ...submissionInfo,
@@ -56,6 +56,7 @@ export default function CommunityAndSocialLinks({
                     name="radio-1"
                     className="radio radio-primary bg-base-100"
                     id="radio-2"
+                    defaultChecked={submissionInfo.maker === false}
                     onClick={() =>
                       setSubmissionInfo({
                         ...submissionInfo,
