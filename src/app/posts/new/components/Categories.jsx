@@ -40,7 +40,9 @@ export default function Categories({ submissionInfo, setSubmissionInfo }) {
       <Label htmlFor="web_app_link">Category</Label>
       <Select onValueChange={ValueChangeHandler}>
         <SelectTrigger className="w-full bg-base-100 cursor-pointer">
-          <SelectValue placeholder="Select a category" />
+          <SelectValue
+            placeholder={submissionInfo.subcategory || "Select a category"}
+          />
         </SelectTrigger>
         <SelectContent>
           {categories.map((category, idx) => (
@@ -51,7 +53,7 @@ export default function Categories({ submissionInfo, setSubmissionInfo }) {
                   value={subcategory}
                   key={idx}
                   className="cursor-pointer"
-                >   
+                >
                   {subcategory}
                 </SelectItem>
               ))}
