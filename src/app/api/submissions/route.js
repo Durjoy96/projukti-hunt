@@ -5,19 +5,19 @@ export async function POST(req) {
   try {
     const client = await clientPromise;
     const db = client.db();
-    const user = await req.json();
-    const query = { email: user.email };
-    const isExist = await db.collection("users").findOne(query);
+    const info = await req.json();
+    const query = { web_app_link: info.web_app_link };
+    const isExist = await db.collection("submissions").findOne(query);
     if (isExist) {
       return new NextResponse(
-        { error: "User already exists" },
+        { error: "Product already exists" },
         {
           status: 409,
         }
       );
     }
-    const result = await db.collection("users").insertOne(user);
-    return NextResponse(result);
+    const result = await db.collection("submissions").insertOne(info);
+    return new NextResponse(result);
   } catch (error) {
     console.error("Database error:", error);
     return new NextResponse(
@@ -28,4 +28,3 @@ export async function POST(req) {
     );
   }
 }
-

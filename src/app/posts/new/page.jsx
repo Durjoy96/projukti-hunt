@@ -7,10 +7,10 @@ import AdditionalFeatures from "./components/AdditionalFeatures";
 import { Button } from "@/components/ui/button";
 import LaunchChecklist from "./components/LaunchChecklist";
 import { CircleCheck, Info, MessageCircle, Plus } from "lucide-react";
+import axios from "axios";
 
 export default function SubmitProduct() {
   const [activeTab, setActiveTab] = useState("basic-information");
-  const [disabled, setDisabled] = useState(true);
   const [submissionInfo, setSubmissionInfo] = useState({
     product_name: "",
     tagline: "",
@@ -27,9 +27,19 @@ export default function SubmitProduct() {
     hunter: false,
   });
   console.log(submissionInfo);
+  const submitBtnHandler = () => {
+    axios
+      .post("/api/submissions", submissionInfo)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <>
-      <section className="max-w-7xl mx-auto px-5 mt-12 md:mt-20 grid grid-cols-[0.3fr_1fr] gap-12">
+      <section className="max-w-7xl mx-auto px-5 mt-12 md:mt-20 grid lg:grid-cols-[0.3fr_1fr] gap-12">
         {/* sidebar */}
         <div className="flex flex-col gap-2">
           <button
@@ -151,6 +161,7 @@ export default function SubmitProduct() {
                   !submissionInfo.category ||
                   !submissionInfo.logo
                 }
+                onClick={submitBtnHandler}
               >
                 Submit
               </Button>

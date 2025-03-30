@@ -3,8 +3,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PlusIcon } from "lucide-react";
 import Categories from "./Categories";
-import { Button } from "@/components/ui/button";
-import CommunityAndSocialLinks from "./CommunityAndSocialLinks";
 
 export default function BasicInformation({
   setSubmissionInfo,
@@ -167,7 +165,7 @@ export default function BasicInformation({
               {/* Screenshots/Banners */}
               <div>
                 <Label>Screenshots/Banners</Label>
-                <div className="flex items-center gap-6">
+                <div className="flex flex-wrap gap-6">
                   {/* banner 1 */}
                   <div>
                     <Input
