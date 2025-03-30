@@ -9,6 +9,7 @@ import LaunchChecklist from "./components/LaunchChecklist";
 
 export default function SubmitProduct() {
   const [activeTab, setActiveTab] = useState("basic-information");
+  const [disabled, setDisabled] = useState(true);
   const [submissionInfo, setSubmissionInfo] = useState({
     product_name: "",
     tagline: "",
@@ -117,6 +118,20 @@ export default function SubmitProduct() {
                 onClick={() => setActiveTab("launch-checklist")}
               >
                 Next: Launch Checklist
+              </Button>
+            )}
+            {activeTab === "launch-checklist" && (
+              <Button
+                disabled={
+                  !submissionInfo.product_name ||
+                  !submissionInfo.tagline ||
+                  !submissionInfo.description ||
+                  !submissionInfo.web_app_link.includes(".") ||
+                  !submissionInfo.category ||
+                  !submissionInfo.logo
+                }
+              >
+                Submit
               </Button>
             )}
           </div>
