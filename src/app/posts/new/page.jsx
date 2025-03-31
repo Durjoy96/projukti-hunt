@@ -27,8 +27,16 @@ export default function SubmitProduct() {
     hunter: false,
   });
   console.log(submissionInfo);
-  const submitBtnHandler = () => {
-    axios
+  const submitBtnHandler = async () => {
+    //remove the unnecessary keys
+    delete submissionInfo.preview_logo;
+    delete submissionInfo.preview_banner_1;
+    delete submissionInfo.preview_banner_2;
+    delete submissionInfo.preview_banner_3;
+
+    // await axios.post("/api/upload-image", {submissionInfo.})
+
+    await axios
       .post("/api/submissions", submissionInfo)
       .then((res) => {
         console.log(res.data);
