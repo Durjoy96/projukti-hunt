@@ -13,33 +13,39 @@ export default function BasicInformation({
     if (file) {
       // Create preview URL
       const objectUrl = URL.createObjectURL(file);
+      // Convert file to base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result.split(",")[1];
 
-      // Update submission info with file
-      if (name === "logo") {
-        setSubmissionInfo({
-          ...submissionInfo,
-          logo: file,
-          preview_logo: objectUrl,
-        });
-      } else if (name === "banner_1") {
-        setSubmissionInfo({
-          ...submissionInfo,
-          banner_1: file,
-          preview_banner_1: objectUrl,
-        });
-      } else if (name === "banner_2") {
-        setSubmissionInfo({
-          ...submissionInfo,
-          banner_2: file,
-          preview_banner_2: objectUrl,
-        });
-      } else if (name === "banner_3") {
-        setSubmissionInfo({
-          ...submissionInfo,
-          banner_3: file,
-          preview_banner_3: objectUrl,
-        });
-      }
+        // Update submission info with file
+        if (name === "logo") {
+          setSubmissionInfo({
+            ...submissionInfo,
+            logo: base64String,
+            preview_logo: objectUrl,
+          });
+        } else if (name === "banner_1") {
+          setSubmissionInfo({
+            ...submissionInfo,
+            banner_1: base64String,
+            preview_banner_1: objectUrl,
+          });
+        } else if (name === "banner_2") {
+          setSubmissionInfo({
+            ...submissionInfo,
+            banner_2: base64String,
+            preview_banner_2: objectUrl,
+          });
+        } else if (name === "banner_3") {
+          setSubmissionInfo({
+            ...submissionInfo,
+            banner_3: base64String,
+            preview_banner_3: objectUrl,
+          });
+        }
+      };
+      reader.readAsDataURL(file);
     }
   };
   return (

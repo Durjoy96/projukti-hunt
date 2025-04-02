@@ -15,7 +15,7 @@ export default function SubmitProduct() {
     product_name: "",
     tagline: "",
     description: "",
-    logo: "",
+    logo: null,
     preview_logo: null,
     preview_banner_1: null,
     preview_banner_2: null,
@@ -34,16 +34,23 @@ export default function SubmitProduct() {
     delete submissionInfo.preview_banner_2;
     delete submissionInfo.preview_banner_3;
 
-    // await axios.post("/api/upload-image", {submissionInfo.})
-
     await axios
-      .post("/api/submissions", submissionInfo)
+      .post("/api/upload-image", { logo: submissionInfo.logo })
       .then((res) => {
         console.log(res.data);
       })
       .catch((error) => {
         console.log(error.message);
       });
+
+    /*     await axios
+      .post("/api/submissions", submissionInfo)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      }); */
   };
   return (
     <>
