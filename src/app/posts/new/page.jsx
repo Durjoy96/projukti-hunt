@@ -20,6 +20,8 @@ export default function SubmitProduct() {
     preview_banner_1: null,
     preview_banner_2: null,
     preview_banner_3: null,
+    banners: [],
+    banners_url: [],
     web_app_link: "https://",
     category: null,
     subcategory: null,
@@ -34,23 +36,46 @@ export default function SubmitProduct() {
     delete submissionInfo.preview_banner_2;
     delete submissionInfo.preview_banner_3;
 
-    await axios
-      .post("/api/upload-image", { logo: submissionInfo.logo })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    submissionInfo.logo &&
+      (await axios
+        .post("/api/upload-image", { img: submissionInfo.logo })
+        .then((res) => {
+          console.log(res.data.data.display_url);
+          delete submissionInfo.logo;
+          submissionInfo.logo_url = res.data.data.display_url;
+        })
+        .catch((error) => {
+          console.log(error.message);
+        }));
 
-    /*     await axios
+    if (submissionInfo.banners && submissionInfo.banners.length > 0) {
+      for (let [index, banner] of submissionInfo.banners.entries()) {
+        await axios
+          .post("/api/upload-image", { img: banner })
+          .then((res) => {
+            console.log(res.data);
+            if (submissionInfo.banners.length - 1 === index) {
+              delete submissionInfo.banners;
+            }
+            submissionInfo.banners_url = [
+              ...submissionInfo.banners_url,
+              res.data.data.display_url,
+            ];
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    }
+
+    await axios
       .post("/api/submissions", submissionInfo)
       .then((res) => {
         console.log(res.data);
       })
       .catch((error) => {
         console.log(error.message);
-      }); */
+      });
   };
   return (
     <>

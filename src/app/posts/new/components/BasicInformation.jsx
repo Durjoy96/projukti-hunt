@@ -28,19 +28,19 @@ export default function BasicInformation({
         } else if (name === "banner_1") {
           setSubmissionInfo({
             ...submissionInfo,
-            banner_1: base64String,
+            banners: [...submissionInfo.banners, base64String],
             preview_banner_1: objectUrl,
           });
         } else if (name === "banner_2") {
           setSubmissionInfo({
             ...submissionInfo,
-            banner_2: base64String,
+            banners: [...submissionInfo.banners, base64String],
             preview_banner_2: objectUrl,
           });
         } else if (name === "banner_3") {
           setSubmissionInfo({
             ...submissionInfo,
-            banner_3: base64String,
+            banners: [...submissionInfo.banners, base64String],
             preview_banner_3: objectUrl,
           });
         }
