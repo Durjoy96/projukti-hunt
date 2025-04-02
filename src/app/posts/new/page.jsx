@@ -8,8 +8,10 @@ import { Button } from "@/components/ui/button";
 import LaunchChecklist from "./components/LaunchChecklist";
 import { CircleCheck, Info, MessageCircle, Plus } from "lucide-react";
 import axios from "axios";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function SubmitProduct() {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("basic-information");
   const [submissionInfo, setSubmissionInfo] = useState({
     product_name: "",
@@ -27,8 +29,10 @@ export default function SubmitProduct() {
     subcategory: null,
     maker: true,
     hunter: false,
+    user_uid: null,
   });
   console.log(submissionInfo);
+  console.log(user);
   const submitBtnHandler = async () => {
     //remove the unnecessary keys
     delete submissionInfo.preview_logo;
@@ -36,6 +40,9 @@ export default function SubmitProduct() {
     delete submissionInfo.preview_banner_2;
     delete submissionInfo.preview_banner_3;
 
+    submissionInfo.user_uid = user?.uid; //add the user uid
+
+    //get logo url
     submissionInfo.logo &&
       (await axios
         .post("/api/upload-image", { img: submissionInfo.logo })
@@ -48,6 +55,7 @@ export default function SubmitProduct() {
           console.log(error.message);
         }));
 
+    //banners url
     if (submissionInfo.banners && submissionInfo.banners.length > 0) {
       for (let [index, banner] of submissionInfo.banners.entries()) {
         await axios
@@ -68,6 +76,7 @@ export default function SubmitProduct() {
       }
     }
 
+    // store on the db
     await axios
       .post("/api/submissions", submissionInfo)
       .then((res) => {
