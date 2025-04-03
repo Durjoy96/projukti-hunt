@@ -9,7 +9,7 @@ export async function POST(req) {
     const query = { web_app_link: info.web_app_link };
     const isExist = await db.collection("submissions").findOne(query);
     if (isExist) {
-      return new NextResponse(
+      return NextResponse.json(
         { error: "Product already exists" },
         {
           status: 409,
@@ -17,10 +17,10 @@ export async function POST(req) {
       );
     }
     const result = await db.collection("submissions").insertOne(info);
-    return new NextResponse(result);
+    return NextResponse.json(result);
   } catch (error) {
     console.error("Database error:", error);
-    return new NextResponse(
+    return NextResponse.json(
       { error: "Failed to create user" },
       {
         status: 500,

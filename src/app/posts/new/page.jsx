@@ -6,13 +6,16 @@ import CommunityAndSocialLinks from "./components/CommunityAndSocialLinks";
 import AdditionalFeatures from "./components/AdditionalFeatures";
 import { Button } from "@/components/ui/button";
 import LaunchChecklist from "./components/LaunchChecklist";
-import { CircleCheck, Info, MessageCircle, Plus } from "lucide-react";
+import { CircleCheck, Info, Loader2, MessageCircle, Plus } from "lucide-react";
 import axios from "axios";
 import { useAuth } from "@/components/AuthProvider";
+import toast from "react-hot-toast";
+import SuccessModal from "@/components/SuccessModal";
 
 export default function SubmitProduct() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("basic-information");
+  const [loading, setLoading] = useState(false);
   const [submissionInfo, setSubmissionInfo] = useState({
     product_name: "",
     tagline: "",
@@ -30,10 +33,11 @@ export default function SubmitProduct() {
     maker: true,
     hunter: false,
     user_uid: null,
+    status: "pending",
   });
   console.log(submissionInfo);
-  console.log(user);
   const submitBtnHandler = async () => {
+    setLoading(true);
     //remove the unnecessary keys
     delete submissionInfo.preview_logo;
     delete submissionInfo.preview_banner_1;
@@ -74,6 +78,9 @@ export default function SubmitProduct() {
             console.log(error.message);
           });
       }
+    } else {
+      delete submissionInfo.banners;
+      delete submissionInfo.banners_url;
     }
 
     // store on the db
@@ -81,9 +88,33 @@ export default function SubmitProduct() {
       .post("/api/submissions", submissionInfo)
       .then((res) => {
         console.log(res.data);
+        if (res.data.acknowledged) {
+          setLoading(false);
+          document.getElementById("success_modal").showModal();
+          setSubmissionInfo({
+            product_name: "",
+            tagline: "",
+            description: "",
+            logo: null,
+            preview_logo: null,
+            preview_banner_1: null,
+            preview_banner_2: null,
+            preview_banner_3: null,
+            banners: [],
+            banners_url: [],
+            web_app_link: "https://",
+            category: null,
+            subcategory: null,
+            maker: true,
+            hunter: false,
+            user_uid: null,
+            status: "pending",
+          });
+        }
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error(error.message);
+        setLoading(false);
       });
   };
   return (
@@ -208,15 +239,17 @@ export default function SubmitProduct() {
                   !submissionInfo.description ||
                   !submissionInfo.web_app_link.includes(".") ||
                   !submissionInfo.category ||
-                  !submissionInfo.logo
+                  !submissionInfo.logo ||
+                  loading
                 }
                 onClick={submitBtnHandler}
               >
-                Submit
+                {loading && <Loader2 className="animate-spin" />} Submit
               </Button>
             )}
           </div>
         </div>
+        <SuccessModal />
       </section>
     </>
   );
