@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
+import { pusher } from "@/lib/pusher";
 
 export async function POST(req) {
   try {
@@ -17,8 +18,7 @@ export async function POST(req) {
       );
 
     if (result) {
-      // Use the global io instance
-      global.io.emit("voteUpdate", {
+      await pusher.trigger("votes", "vote-updated", {
         productId: result._id.toString(),
         votes: result.votes,
       });

@@ -6,19 +6,15 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import toast from "react-hot-toast";
-import { io } from "socket.io-client";
+import { pusherClient } from "@/lib/pusher";
 
 export default function TodayProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Initialize socket connection
-    const socket = io(
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
-    );
-
-    // Listen for vote updates
-    socket.on("voteUpdate", ({ productId, votes }) => {
+    // Subscribe to Pusher channel
+    const channel = pusherClient.subscribe("votes");
+    channel.bind("vote-updated", ({ productId, votes }) => {
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
           product._id === productId ? { ...product, votes } : product
@@ -31,7 +27,10 @@ export default function TodayProducts() {
       console.log("db", res.data);
     });
 
-    return () => socket.disconnect();
+    // Cleanup
+    return () => {
+      pusherClient.unsubscribe("votes");
+    };
   }, []);
 
   const handleVote = async (productId) => {
