@@ -76,7 +76,8 @@ export default function TodayProducts() {
                 <p className="text-base font-normal text-base-content-secondary">
                   {product.tagline}
                 </p>
-                <p className="text-sm font-normal text-base-content-secondary flex items-center gap-2 mt-2">
+                {/* categories */}
+                <p className="text-sm font-normal text-base-content-secondary items-center gap-2 mt-2 hidden md:flex">
                   <Tags className="w-4 h-4 stroke-base-content-secondary" />{" "}
                   <span className="flex items-center">
                     {product.category}{" "}
