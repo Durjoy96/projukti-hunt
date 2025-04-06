@@ -10,13 +10,30 @@ export async function POST(req) {
     const client = await clientPromise;
     const db = client.db();
 
-    const result = await db
-      .collection("submissions")
-      .findOneAndUpdate(
-        { _id: new ObjectId(productId) },
-        { $inc: { votes: 1 }, $push: { voters: userId } },
-        { returnDocument: "after" }
-      );
+    const isVoted = await db.collection("submissions").findOne({
+      _id: new ObjectId(productId),
+      voters: userId,
+    });
+
+    let result;
+
+    if (isVoted) {
+      result = await db
+        .collection("submissions")
+        .findOneAndUpdate(
+          { _id: new ObjectId(productId) },
+          { $inc: { votes: -1 }, $pull: { voters: userId } },
+          { returnDocument: "after" }
+        );
+    } else {
+      result = await db
+        .collection("submissions")
+        .findOneAndUpdate(
+          { _id: new ObjectId(productId) },
+          { $inc: { votes: 1 }, $push: { voters: userId } },
+          { returnDocument: "after" }
+        );
+    }
 
     if (result) {
       await pusher.trigger("votes", "vote-updated", {

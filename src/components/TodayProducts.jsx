@@ -42,9 +42,7 @@ export default function TodayProducts() {
         productId,
         userId: user.uid,
       });
-      if (response.data.success) {
-        toast.success("Voted!");
-      } else {
+      if (!response.data.success) {
         toast.error(response.data.error || "Failed to vote");
       }
     } catch (error) {
