@@ -1,17 +1,18 @@
-
-
 import axios from "axios";
 import { Triangle } from "lucide-react";
 import React from "react";
 import { useAuth } from "./AuthProvider";
 import toast from "react-hot-toast";
 import { Button } from "./ui/button";
+import SignInModal from "./sign-in-modal";
 
 export default function Vote({ product }) {
+
   const { user } = useAuth();
+
   const handleVote = async (productId) => {
     if (!user) {
-      toast.error("Please login to vote");
+      document.getElementById("sign_in_modal").showModal();
       return;
     }
     try {
@@ -27,6 +28,7 @@ export default function Vote({ product }) {
       toast.error(error.response?.data?.error || "Failed to vote");
     }
   };
+  
   return (
     <>
       <Button
@@ -43,6 +45,7 @@ export default function Vote({ product }) {
         />
         {product.votes || 0}
       </Button>
+      <SignInModal />
     </>
   );
 }
