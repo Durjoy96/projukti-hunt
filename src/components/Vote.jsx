@@ -7,10 +7,13 @@ import { Button } from "./ui/button";
 import SignInModal from "./sign-in-modal";
 
 export default function Vote({ product }) {
-
   const { user } = useAuth();
 
-  const handleVote = async (productId) => {
+  const handleVote = async (e, productId) => {
+    // Prevent default action and stop propagation
+    e.stopPropagation();
+    e.preventDefault();
+
     if (!user) {
       document.getElementById("sign_in_modal").showModal();
       return;
@@ -28,12 +31,12 @@ export default function Vote({ product }) {
       toast.error(error.response?.data?.error || "Failed to vote");
     }
   };
-  
+
   return (
     <>
       <Button
         variant="outline"
-        onClick={() => handleVote(product._id)}
+        onClick={(e) => handleVote(e, product._id)}
         className="grid w-14 h-14 text-base-content-secondary hover:border-primary hover:text-base-content"
       >
         <Triangle
