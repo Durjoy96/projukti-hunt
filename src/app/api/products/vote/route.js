@@ -5,7 +5,8 @@ import { pusher } from "@/lib/pusher";
 
 export async function POST(req) {
   try {
-    const { productId } = await req.json();
+    const { productId, userId } = await req.json();
+    console.log(userId);
     const client = await clientPromise;
     const db = client.db();
 
@@ -13,7 +14,7 @@ export async function POST(req) {
       .collection("submissions")
       .findOneAndUpdate(
         { _id: new ObjectId(productId) },
-        { $inc: { votes: 1 } },
+        { $inc: { votes: 1 }, $push: { voters: userId } },
         { returnDocument: "after" }
       );
 
@@ -21,6 +22,7 @@ export async function POST(req) {
       await pusher.trigger("votes", "vote-updated", {
         productId: result._id.toString(),
         votes: result.votes,
+        voters: result.voters,
       });
       return NextResponse.json({ success: true });
     } else {

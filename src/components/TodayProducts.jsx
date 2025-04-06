@@ -7,17 +7,20 @@ import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import toast from "react-hot-toast";
 import { pusherClient } from "@/lib/pusher";
+import { useAuth } from "./AuthProvider";
 
 export default function TodayProducts() {
+  const { user } = useAuth();
+
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     // Subscribe to Pusher channel
     const channel = pusherClient.subscribe("votes");
-    channel.bind("vote-updated", ({ productId, votes }) => {
+    channel.bind("vote-updated", ({ productId, votes, voters }) => {
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
-          product._id === productId ? { ...product, votes } : product
+          product._id === productId ? { ...product, votes, voters } : product
         )
       );
     });
@@ -35,7 +38,10 @@ export default function TodayProducts() {
 
   const handleVote = async (productId) => {
     try {
-      const response = await axios.post(`/api/products/vote`, { productId });
+      const response = await axios.post(`/api/products/vote`, {
+        productId,
+        userId: user.uid,
+      });
       if (response.data.success) {
         toast.success("Voted!");
       } else {
@@ -49,11 +55,11 @@ export default function TodayProducts() {
 
   return (
     <>
-      <div className="max-w-4xl mt-8 grid gap-6">
+      <div className="max-w-4xl mt-8 grid">
         {products.map((product) => (
           <div
             key={product._id}
-            className="flex gap-4 items-start p-6 bg-base-100 rounded-lg w-full hover:bg-base-100/80 hover:shadow-sm cursor-pointer transition-all duration-200 ease-in-out"
+            className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out"
           >
             <div>
               <Image
@@ -85,10 +91,16 @@ export default function TodayProducts() {
                 <Button
                   variant="outline"
                   onClick={() => handleVote(product._id)}
-                  className="grid w-14 h-14"
+                  className="grid w-14 h-14 text-base-content-secondary hover:border-primary hover:text-base-content"
                 >
-                  <Triangle className="w-20 h-20" />
-                  {product.votes}
+                  <Triangle
+                    className={`w-20 h-20 stroke-base-content ${
+                      product.voters &&
+                      product?.voters.some((voter) => voter === user?.uid) &&
+                      "stroke-primary fill-primary"
+                    }`}
+                  />
+                  {product.votes || 0}
                 </Button>
               </div>
             </div>
