@@ -16,6 +16,25 @@ export async function POST(req) {
         }
       );
     }
+
+    let baseTitle = info.title;
+    let finalTitle = baseTitle;
+    let counter = 1;
+
+    while (true) {
+      const isTitleExist = await db
+        .collection("submissions")
+        .findOne({ title: finalTitle });
+      if (!isTitleExist) {
+        break; // Title is unique, exit the loop
+      }
+      // Increment the title by appending a number
+      finalTitle = `${baseTitle}-${counter}`;
+      counter++;
+    }
+
+    info.title = finalTitle; // Set the unique title
+
     const result = await db.collection("submissions").insertOne(info);
     return NextResponse.json(result);
   } catch (error) {

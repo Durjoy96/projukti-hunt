@@ -33,6 +33,7 @@ export default function SubmitProduct() {
     maker: true,
     hunter: false,
     user_uid: null,
+    title: null,
     status: "pending",
   });
   console.log(submissionInfo);
@@ -45,6 +46,9 @@ export default function SubmitProduct() {
     delete submissionInfo.preview_banner_3;
 
     submissionInfo.user_uid = user?.uid; //add the user uid
+    submissionInfo.title = submissionInfo?.product_name
+      .replaceAll(" ", "-")
+      .toLowerCase(); //add the title
 
     //get logo url
     submissionInfo.logo &&
@@ -108,6 +112,7 @@ export default function SubmitProduct() {
             maker: true,
             hunter: false,
             user_uid: null,
+            title: null,
             status: "pending",
           });
         }

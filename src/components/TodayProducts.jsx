@@ -43,7 +43,7 @@ export default function TodayProducts() {
       </h1>
       <div className="max-w-4xl mt-8 grid">
         {products.map((product) => (
-          <Link href={`/posts/${product._id}`} key={product._id}>
+          <Link href={`/posts/${product.product_name}`} key={product._id}>
             <div className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out group">
               <div>
                 <Image
