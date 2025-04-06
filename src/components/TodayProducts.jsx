@@ -1,13 +1,12 @@
 "use client";
 
 import axios from "axios";
-import { Dot, Tags, Triangle } from "lucide-react";
+import { Dot, ExternalLinkIcon, Tags } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Button } from "./ui/button";
-import toast from "react-hot-toast";
 import { pusherClient } from "@/lib/pusher";
 import { useAuth } from "./AuthProvider";
+import Vote from "./Vote";
 
 export default function TodayProducts() {
   const { user } = useAuth();
@@ -36,28 +35,16 @@ export default function TodayProducts() {
     };
   }, []);
 
-  const handleVote = async (productId) => {
-    try {
-      const response = await axios.post(`/api/products/vote`, {
-        productId,
-        userId: user.uid,
-      });
-      if (!response.data.success) {
-        toast.error(response.data.error || "Failed to vote");
-      }
-    } catch (error) {
-      console.error("Vote error:", error);
-      toast.error(error.response?.data?.error || "Failed to vote");
-    }
-  };
-
   return (
     <>
+      <h1 className="text-2xl font-medium text-base-content">
+        Top Bangladeshi Products Launching Today
+      </h1>
       <div className="max-w-4xl mt-8 grid">
         {products.map((product) => (
           <div
             key={product._id}
-            className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out"
+            className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out group"
           >
             <div>
               <Image
@@ -70,9 +57,15 @@ export default function TodayProducts() {
             </div>
             <div className="flex justify-between items-start w-full">
               <div>
-                <h3 className="text-lg font-medium text-base-content">
-                  {product.product_name}
-                </h3>
+                <div className="flex items-center gap-2 group-hover:text-primary">
+                  <h3 className="text-lg font-medium text-base-content group-hover:text-primary">
+                    {product.product_name}
+                  </h3>
+                  <ExternalLinkIcon
+                    className="w-4 h-4 hidden group-hover:flex"
+                    onClick={() => window.open(product.web_app_link, "_blank")}
+                  />
+                </div>
                 <p className="text-base font-normal text-base-content-secondary">
                   {product.tagline}
                 </p>
@@ -87,20 +80,7 @@ export default function TodayProducts() {
                 </p>
               </div>
               <div>
-                <Button
-                  variant="outline"
-                  onClick={() => handleVote(product._id)}
-                  className="grid w-14 h-14 text-base-content-secondary hover:border-primary hover:text-base-content"
-                >
-                  <Triangle
-                    className={`w-20 h-20 stroke-base-content ${
-                      product.voters &&
-                      product?.voters.some((voter) => voter === user?.uid) &&
-                      "stroke-primary fill-primary"
-                    }`}
-                  />
-                  {product.votes || 0}
-                </Button>
+                <Vote product={product} />
               </div>
             </div>
           </div>
