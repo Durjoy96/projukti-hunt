@@ -121,18 +121,17 @@ export default function ProductDetails() {
             <span className="text-base text-base-content-secondary font-normal">
               {product.pricing}
             </span>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-center md:justify-between md:items-center">
               {/* categories */}
-              <div className="mt-8 flex items-center gap-2">
+              <div className="mt-8 md:flex items-center gap-2 hidden">
                 <span className="text-base text-base-content">
                   Categories:{" "}
                 </span>
-                <p className="text-base font-normal text-base-content-secondary items-center gap-2 hidden md:flex">
-                  <Tags className="w-4 h-4 stroke-base-content-secondary" />{" "}
+                <p className="text-base font-normal text-base-content-secondary items-center gap-2">
                   <span className="flex items-center">
-                    {product.category}{" "}
+                    <span>{product.category}</span>
                     <Dot className="w-4 h-4 stroke-base-content-secondary" />{" "}
-                    {product.subcategory}
+                    <span>{product.subcategory}</span>
                   </span>
                 </p>
               </div>

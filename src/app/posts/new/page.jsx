@@ -30,9 +30,8 @@ export default function SubmitProduct() {
     web_app_link: "https://",
     category: null,
     subcategory: null,
-    maker: true,
-    hunter: false,
-    user_uid: null,
+    makers: true,
+    hunter: true,
     title: null,
     status: "pending",
   });
@@ -45,10 +44,12 @@ export default function SubmitProduct() {
     delete submissionInfo.preview_banner_2;
     delete submissionInfo.preview_banner_3;
 
-    submissionInfo.user_uid = user?.uid; //add the user uid
     submissionInfo.title = submissionInfo?.product_name
       .replaceAll(" ", "-")
       .toLowerCase(); //add the title
+
+    submissionInfo.hunter = user && user?.uid; //add the hunter id
+    submissionInfo.makers = user && submissionInfo.makers ? [user.uid] : []; //add the maker id
 
     //get logo url
     submissionInfo.logo &&
@@ -109,9 +110,8 @@ export default function SubmitProduct() {
             web_app_link: "https://",
             category: null,
             subcategory: null,
-            maker: true,
-            hunter: false,
-            user_uid: null,
+            makers: true,
+            hunter: true,
             title: null,
             status: "pending",
           });

@@ -1,3 +1,4 @@
+import { useAuth } from "@/components/AuthProvider";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -5,6 +6,7 @@ export default function CommunityAndSocialLinks({
   setSubmissionInfo,
   submissionInfo,
 }) {
+  const { user } = useAuth();
   return (
     <>
       <div className="max-w-lg">
@@ -31,12 +33,11 @@ export default function CommunityAndSocialLinks({
                     name="radio-1"
                     className="radio radio-primary bg-base-100"
                     id="radio-1"
-                    defaultChecked={submissionInfo.maker === true}
+                    defaultChecked={submissionInfo.makers === true}
                     onClick={() =>
                       setSubmissionInfo({
                         ...submissionInfo,
-                        maker: true,
-                        hunter: true,
+                        makers: true,
                       })
                     }
                   />
@@ -56,12 +57,11 @@ export default function CommunityAndSocialLinks({
                     name="radio-1"
                     className="radio radio-primary bg-base-100"
                     id="radio-2"
-                    defaultChecked={submissionInfo.maker === false}
+                    defaultChecked={submissionInfo.makers === false}
                     onClick={() =>
                       setSubmissionInfo({
                         ...submissionInfo,
-                        maker: false,
-                        hunter: true,
+                        makers: false,
                       })
                     }
                   />
