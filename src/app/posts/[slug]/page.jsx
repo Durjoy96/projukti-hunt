@@ -4,7 +4,15 @@ import { Button } from "@/components/ui/button";
 import Vote from "@/components/Vote";
 import { pusherClient } from "@/lib/pusher";
 import axios from "axios";
-import { ExternalLink } from "lucide-react";
+import {
+  Dot,
+  ExternalLink,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Tags,
+  UsersRound,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -101,6 +109,55 @@ export default function ProductDetails() {
                     <Vote product={product} />
                   </div>
                 </div>
+              </div>
+            </div>
+            {/* description */}
+            <div className="mt-8">
+              <p className="text-base font-normal text-base-content-secondary mt-4">
+                {product.description}
+              </p>
+            </div>
+            {/* pricing */}
+            <span className="text-base text-base-content-secondary font-normal">
+              {product.pricing}
+            </span>
+            <div className="flex justify-between items-center">
+              {/* categories */}
+              <div className="mt-8 flex items-center gap-2">
+                <span className="text-base text-base-content">
+                  Categories:{" "}
+                </span>
+                <p className="text-base font-normal text-base-content-secondary items-center gap-2 hidden md:flex">
+                  <Tags className="w-4 h-4 stroke-base-content-secondary" />{" "}
+                  <span className="flex items-center">
+                    {product.category}{" "}
+                    <Dot className="w-4 h-4 stroke-base-content-secondary" />{" "}
+                    {product.subcategory}
+                  </span>
+                </p>
+              </div>
+              {/* product social accounts */}
+              <div className="flex items-center gap-4">
+                {product.fb_page && (
+                  <Link href={product.fb_page} target="_blank">
+                    <Facebook className="w-6 h-6 stroke-[1.5] hover:stroke-primary" />
+                  </Link>
+                )}
+                {product.fb_group && (
+                  <Link href={product.fb_group} target="_blank">
+                    <UsersRound className="w-6 h-6 stroke-[1.5] hover:stroke-primary" />
+                  </Link>
+                )}
+                {product.instagram && (
+                  <Link href={product.instagram} target="_blank">
+                    <Instagram className="w-6 h-6 stroke-[1.5] hover:stroke-primary" />
+                  </Link>
+                )}
+                {product.linkedin && (
+                  <Link href={product.linkedin} target="_blank">
+                    <Linkedin className="w-6 h-6 stroke-[1.5] hover:stroke-primary" />
+                  </Link>
+                )}
               </div>
             </div>
           </>
