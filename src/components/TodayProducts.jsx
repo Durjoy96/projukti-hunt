@@ -5,12 +5,10 @@ import { Dot, ExternalLinkIcon, Tags } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { pusherClient } from "@/lib/pusher";
-import { useAuth } from "./AuthProvider";
 import Vote from "./Vote";
 import Link from "next/link";
 
 export default function TodayProducts() {
-  const { user } = useAuth();
 
   const [products, setProducts] = useState([]);
 
@@ -43,7 +41,7 @@ export default function TodayProducts() {
       </h1>
       <div className="max-w-4xl mt-8 grid">
         {products.map((product) => (
-          <Link href={`/posts/${product.product_name}`} key={product._id}>
+          <Link href={`/posts/${product.title}`} key={product._id}>
             <div className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out group">
               <div>
                 <Image
