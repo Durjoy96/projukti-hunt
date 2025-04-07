@@ -72,7 +72,7 @@ export default function ProductDetails() {
               )}
               {/* product details */}
               <div className="absolute bottom-0 bg-base-100/50 backdrop-blur-md w-full p-5 rounded-lg">
-                <div className="flex justify-between items-center">
+                <div className="md:flex md:justify-between md:items-center">
                   <div className="flex items-start gap-6">
                     <Image
                       src={product.logo_url}
@@ -91,7 +91,7 @@ export default function ProductDetails() {
                     </div>
                   </div>
                   {/* buttons */}
-                  <div>
+                  <div className="flex items-center gap-4 mt-8 md:mt-0">
                     <Link href={product.web_app_link} target="_blank">
                       <Button variant="outline">
                         {" "}
