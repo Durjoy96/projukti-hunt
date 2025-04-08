@@ -29,3 +29,22 @@ export async function POST(req) {
   }
 }
 
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const uid = searchParams.get("uid");
+    console.log("uid", uid);
+    const client = await clientPromise;
+    const db = client.db();
+    const users = await db.collection("users").findOne({ _id: uid });
+    return NextResponse.json(users, { status: 200 });
+  } catch (error) {
+    console.error("Database error:", error);
+    return new NextResponse(
+      { error: "Failed to fetch users" },
+      {
+        status: 500,
+      }
+    );
+  }
+}

@@ -23,6 +23,7 @@ import toast from "react-hot-toast";
 export default function ProductDetails() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
+  const [hunter, setHunter] = useState(null);
   useEffect(() => {
     const channel = pusherClient.subscribe("votes");
     channel.bind("vote-updated", ({ productId, votes, voters }) => {
@@ -52,6 +53,19 @@ export default function ProductDetails() {
       pusherClient.unsubscribe("votes");
     };
   }, [slug]);
+
+  useEffect(() => {
+    axios
+      .get(`/api/auth/users?uid=${product?.hunter}`)
+      .then((res) => {
+        setHunter(() => res.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching product details:", error.message);
+        toast.error("Hunter not found");
+      });
+  }, [product]);
+
   return (
     <>
       <section className="max-w-5xl mx-auto px-5 mt-12">
@@ -164,7 +178,6 @@ export default function ProductDetails() {
               <span className="flex items-center gap-2 text-base font-medium text-base-content">
                 <Users /> Meet the team
               </span>
-              
             </div>
           </>
         )}
