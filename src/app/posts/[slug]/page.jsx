@@ -20,6 +20,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Carousel from "./Carousel";
 
 export default function ProductDetails() {
   const { slug } = useParams();
@@ -34,7 +35,6 @@ export default function ProductDetails() {
           : prevProducts
       );
     });
-
     axios
       .get(`/api/products/details?title=${slug}`)
       .then((res) => {
@@ -202,6 +202,12 @@ export default function ProductDetails() {
                 </div>
               )}
             </div>
+            {/* carousel */}
+            {(product.banners_url.length > 0 || product.youtube_video_link) && (
+              <div className="mt-12">
+                <Carousel product={product} />
+              </div>
+            )}
           </>
         )}
       </section>

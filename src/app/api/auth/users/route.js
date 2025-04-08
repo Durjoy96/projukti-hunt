@@ -36,8 +36,8 @@ export async function GET(req) {
     console.log("uid", uid);
     const client = await clientPromise;
     const db = client.db();
-    const users = await db.collection("users").findOne({ _id: uid });
-    return NextResponse.json(users, { status: 200 });
+    const user = await db.collection("users").findOne({ _id: uid });
+    return NextResponse.json(user, { status: 200 });
   } catch (error) {
     console.error("Database error:", error);
     return new NextResponse(
