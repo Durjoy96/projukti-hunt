@@ -1,4 +1,3 @@
-import { useAuth } from "@/components/AuthProvider";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -6,7 +5,6 @@ export default function CommunityAndSocialLinks({
   setSubmissionInfo,
   submissionInfo,
 }) {
-  const { user } = useAuth();
   return (
     <>
       <div className="max-w-lg">

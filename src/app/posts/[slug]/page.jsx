@@ -11,6 +11,7 @@ import {
   Instagram,
   Linkedin,
   Tags,
+  Users,
   UsersRound,
 } from "lucide-react";
 import Image from "next/image";
@@ -158,6 +159,12 @@ export default function ProductDetails() {
                   </Link>
                 )}
               </div>
+            </div>
+            <div className="p-6 bg-base-200 rounded-lg mt-8">
+              <span className="flex items-center gap-2 text-base font-medium text-base-content">
+                <Users /> Meet the team
+              </span>
+              
             </div>
           </>
         )}
