@@ -3,6 +3,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PlusIcon } from "lucide-react";
 import Categories from "./Categories";
+import toast from "react-hot-toast";
 
 export default function BasicInformation({
   setSubmissionInfo,
@@ -10,7 +11,24 @@ export default function BasicInformation({
 }) {
   const handleImgChange = (e, name) => {
     const file = e.target.files[0];
+    // Allowed image formats
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+
     if (file) {
+      // Validate file type
+      if (!allowedTypes.includes(file.type)) {
+        toast.error("Please upload JPEG, PNG or WebP images only");
+        e.target.value = ""; // Clear the input
+        return;
+      }
+
+      // Validate file size (optional) - example: 5MB limit
+      const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+      if (file.size > maxSize) {
+        toast.error("Image size should be less than 5MB");
+        e.target.value = "";
+        return;
+      }
       // Create preview URL
       const objectUrl = URL.createObjectURL(file);
       // Convert file to base64
