@@ -1,5 +1,7 @@
 "use client";
 
+import Hunter from "@/components/Hunter";
+import Maker from "@/components/Maker";
 import { Button } from "@/components/ui/button";
 import Vote from "@/components/Vote";
 import { pusherClient } from "@/lib/pusher";
@@ -10,7 +12,6 @@ import {
   Facebook,
   Instagram,
   Linkedin,
-  Tags,
   Users,
   UsersRound,
 } from "lucide-react";
@@ -175,10 +176,31 @@ export default function ProductDetails() {
                 )}
               </div>
             </div>
-            <div className="p-6 bg-base-200 rounded-lg mt-8">
-              <span className="flex items-center gap-2 text-base font-medium text-base-content">
+            <div className="p-6 bg-base-200 rounded-lg mt-8 flex justify-between items-center">
+              <span className="flex items-center gap-2 text-base font-semibold text-base-content">
                 <Users /> Meet the team
               </span>
+              {/* hunter details */}
+              {hunter && (
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={hunter?.photo_url}
+                    alt={hunter?.name}
+                    width={50}
+                    height={50}
+                    className="rounded-full"
+                  />
+                  <div className="grid gap-2">
+                    <span className="text-base font-semibold text-base-content">
+                      {hunter?.name}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <Hunter />
+                      {product.makers.length > 0 && <Maker />}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </>
         )}
