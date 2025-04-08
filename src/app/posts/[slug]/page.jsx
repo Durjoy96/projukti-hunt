@@ -54,6 +54,7 @@ export default function ProductDetails() {
     };
   }, [slug]);
 
+  //hunter details
   useEffect(() => {
     axios
       .get(`/api/auth/users?uid=${product?.hunter}`)
@@ -87,14 +88,14 @@ export default function ProductDetails() {
                   src={product.banners_url[0]}
                   alt={product.product_name}
                   width={1000}
-                  height={500}
-                  className="w-full h-auto object-cover object-center"
+                  height={300}
+                  className="w-full h-72 object-cover object-top rounded-tr-lg rounded-tl-lg"
                 />
               ) : (
                 <div className="w-full h-72 bg-base-200 rounded-lg"></div>
               )}
               {/* product details */}
-              <div className="absolute bottom-0 bg-base-100/50 backdrop-blur-md w-full p-5 rounded-lg">
+              <div className="absolute bottom-0 bg-base-100/50 backdrop-blur-md w-full p-5 rounded-tr-lg rounded-tl-lg">
                 <div className="md:flex md:justify-between md:items-center">
                   <div className="flex items-start gap-6">
                     <Image
@@ -133,12 +134,12 @@ export default function ProductDetails() {
               </p>
             </div>
             {/* pricing */}
-            <span className="text-base text-base-content-secondary font-normal">
+            <span className="text-base text-base-content-secondary font-normal inline-block mt-8">
               {product.pricing}
             </span>
-            <div className="flex justify-center md:justify-between md:items-center">
+            <div className="flex justify-center md:justify-between md:items-center mt-2">
               {/* categories */}
-              <div className="mt-8 md:flex items-center gap-2 hidden">
+              <div className="md:flex items-center gap-2 hidden">
                 <span className="text-base text-base-content">
                   Categories:{" "}
                 </span>
