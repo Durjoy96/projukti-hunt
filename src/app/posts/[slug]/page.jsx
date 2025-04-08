@@ -138,7 +138,7 @@ export default function ProductDetails() {
             <span className="text-base text-base-content-secondary font-normal inline-block mt-8">
               {product.pricing}
             </span>
-            <div className="flex justify-center md:justify-between md:items-center mt-2">
+            <div className="flex justify-start md:justify-between md:items-center mt-2">
               {/* categories */}
               <div className="md:flex items-center gap-2 hidden">
                 <span className="text-base text-base-content">
@@ -176,7 +176,7 @@ export default function ProductDetails() {
                 )}
               </div>
             </div>
-            <div className="p-6 bg-base-200 rounded-lg mt-8 flex justify-between items-center">
+            <div className="p-6 bg-base-200 rounded-lg mt-8 flex md:justify-between md:items-center flex-col md:flex-row gap-4 md:gap-0">
               <span className="flex items-center gap-2 text-base font-semibold text-base-content">
                 <Users /> Meet the team
               </span>
