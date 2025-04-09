@@ -21,6 +21,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Carousel from "./Carousel";
+import Discussions from "./Discussions";
 
 export default function ProductDetails() {
   const { slug } = useParams();
@@ -208,6 +209,8 @@ export default function ProductDetails() {
                 <Carousel product={product} />
               </div>
             )}
+            {/* Discussions */}
+            <Discussions />
           </>
         )}
       </section>
