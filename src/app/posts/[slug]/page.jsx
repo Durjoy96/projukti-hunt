@@ -210,7 +210,7 @@ export default function ProductDetails() {
               </div>
             )}
             {/* Discussions */}
-            <Discussions />
+            <Discussions product={product} />
           </>
         )}
       </section>
