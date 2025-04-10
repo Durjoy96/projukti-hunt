@@ -3,11 +3,12 @@
 import { useAuth } from "@/components/AuthProvider";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Discussions({ product }) {
   const { user } = useAuth();
   const [comment, setComment] = useState("");
+  const [discussions, setDiscussions] = useState(null);
   const textareaRef = useRef(null);
 
   const handleChange = (e) => {
@@ -25,8 +26,17 @@ export default function Discussions({ product }) {
       content: comment,
       userId: user.uid,
     };
-    axios.post("/api/discussions", commentInfo);
+    axios.post("/api/discussions", commentInfo).then((res) => {
+      console.log(res);
+    });
   };
+
+  useEffect(() => {
+    axios.get(`/api/discussions?id=${product._id}`).then((res) => {
+      console.log(res);
+      setDiscussions(() => res.data);
+    });
+  }, [product._id]);
 
   return (
     <>
@@ -46,6 +56,10 @@ export default function Discussions({ product }) {
         >
           Comment
         </Button>
+      </div>
+
+      <div>
+        
       </div>
     </>
   );
