@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import React, { useRef, useState } from "react";
 
-export default function Textarea({ product, parentId }) {
+export default function Textarea({ product, parentId, setIsReplying }) {
   const { user } = useAuth();
   const textareaRef = useRef(null);
   const [comment, setComment] = useState("");
@@ -29,7 +29,11 @@ export default function Textarea({ product, parentId }) {
   };
 
   return (
-    <div className="relative border-2 border-base-300 pb-14 rounded-lg bg-transparent">
+    <div
+      className={`relative border-2 border-base-300 pb-14 rounded-lg bg-transparent ${
+        parentId && "mt-3"
+      }`}
+    >
       <textarea
         ref={textareaRef}
         value={comment}
@@ -38,13 +42,20 @@ export default function Textarea({ product, parentId }) {
         placeholder="What do you think?..."
         className="w-full resize-none overflow-hidden p-3 text-base leading-relaxed focus:outline-none"
       />
-      <Button
-        onClick={onComment}
-        className="absolute bottom-6 right-6"
-        variant="outline"
-      >
-        Comment
-      </Button>
+      <div className="absolute bottom-6 right-6 flex items-center gap-6">
+        {parentId && (
+          <button
+            onClick={() => setIsReplying((prev) => !prev)}
+            className="text-base font-semibold text-base-content hover:text-base-content/70 cursor-pointer"
+          >
+            Cancel
+          </button>
+        )}
+
+        <Button onClick={onComment} variant="outline">
+          Comment
+        </Button>
+      </div>
     </div>
   );
 }

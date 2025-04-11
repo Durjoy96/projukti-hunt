@@ -1,9 +1,14 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Textarea from "./Textarea";
+import {
+  MessageCircle,
+  MessageCircleMore,
+  MessageSquareTextIcon,
+} from "lucide-react";
 
 export default function Comment({ discussion, product }) {
-  const [isReply, setIsReply] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
   return (
     <>
       <div
@@ -36,13 +41,18 @@ export default function Comment({ discussion, product }) {
             </p>
             <div className="mt-3">
               <button
-                onClick={() => setIsReply((prev) => !prev)}
-                className="cursor-pointer text-base-content"
+                onClick={() => setIsReplying(() => true)}
+                className="cursor-pointer text-sm font-semibold text-base-content-secondary flex items-center gap-1"
               >
+                <MessageCircle className="w-4.5 h-4.5 stroke-base-content-secondary" />{" "}
                 Reply
               </button>
-              {isReply && (
-                <Textarea product={product} parentId={discussion._id} />
+              {isReplying && (
+                <Textarea
+                  product={product}
+                  parentId={discussion._id}
+                  setIsReplying={setIsReplying}
+                />
               )}
             </div>
           </div>
