@@ -1,15 +1,12 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
-import { Button } from "@/components/ui/button";
 import axios from "axios";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Textarea from "./Textarea";
 import Comment from "./Comment";
 
 export default function Discussions({ product }) {
-  const { user } = useAuth();
   const [discussions, setDiscussions] = useState([]);
 
   useEffect(() => {

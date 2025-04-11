@@ -46,7 +46,7 @@ export default function Textarea({ product, parentId, setIsReplying }) {
         {parentId && (
           <button
             onClick={() => setIsReplying((prev) => !prev)}
-            className="text-base font-semibold text-base-content hover:text-base-content/70 cursor-pointer"
+            className="text-base font-semibold text-base-content hover:text-primary transition-all delay-200 cursor-pointer"
           >
             Cancel
           </button>
