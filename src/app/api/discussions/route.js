@@ -1,4 +1,5 @@
 import clientPromise from "@/lib/mongodb";
+import { pusher } from "@/lib/pusher";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
@@ -12,6 +13,19 @@ export async function POST(req) {
     const insertedDoc = await db
       .collection("discussions")
       .findOne({ _id: new ObjectId(result.insertedId) });
+
+    const userData = await db
+      .collection("users")
+      .findOne(
+        { _id: insertedDoc.userId },
+        { projection: { name: 1, photo_url: 1, username: 1 } }
+      );
+
+    insertedDoc.author = userData;
+
+    if (insertedDoc) {
+      pusher.trigger("comments", "comments-updated", insertedDoc);
+    }
 
     return NextResponse.json(insertedDoc, { status: 200 });
   } catch (error) {
