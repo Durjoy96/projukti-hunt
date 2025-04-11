@@ -2,6 +2,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import React, { useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Textarea({ product, parentId, setIsReplying }) {
   const { user } = useAuth();
@@ -9,6 +10,16 @@ export default function Textarea({ product, parentId, setIsReplying }) {
   const [comment, setComment] = useState("");
 
   const onComment = () => {
+    if (!user) {
+      document.getElementById("sign_in_modal").showModal();
+      return;
+    }
+
+    if (!comment) {
+      toast.error("Oops! No text entered");
+      return;
+    }
+
     const commentInfo = {
       postId: product._id,
       parentId: parentId || null,
