@@ -2,6 +2,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Textarea from "./Textarea";
 import { MessageCircle } from "lucide-react";
+import Maker from "@/components/Maker";
+import Hunter from "@/components/Hunter";
 
 export default function Comment({ discussion, product }) {
   const [isReplying, setIsReplying] = useState(false);
@@ -29,9 +31,16 @@ export default function Comment({ discussion, product }) {
             className="rounded-full"
           />
           <div className="w-full pb-4">
-            <span className="text-base font-semibold text-base-content">
-              {discussion?.author?.name}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-base font-semibold text-base-content">
+                {discussion?.author?.name}
+              </span>
+              {product.makers.some((id) => id === discussion.userId) ? (
+                <Maker />
+              ) : (
+                product.hunter === discussion.userId && <Hunter />
+              )}
+            </div>
             <p className="mt-2 text-base-content-secondary text-base font-normal">
               {discussion.content}
             </p>

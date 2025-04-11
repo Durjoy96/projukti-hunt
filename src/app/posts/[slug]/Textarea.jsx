@@ -16,7 +16,7 @@ export default function Textarea({ product, parentId, setIsReplying }) {
       userId: user.uid,
     };
     axios.post("/api/discussions", commentInfo).then((res) => {
-      console.log(res);
+      setComment(""); //clear textarea
     });
   };
 

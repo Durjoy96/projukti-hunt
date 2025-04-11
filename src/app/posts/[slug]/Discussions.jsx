@@ -36,7 +36,9 @@ export default function Discussions({ product }) {
 
   return (
     <>
-      <Textarea product={product} />
+      <div className="mt-12">
+        <Textarea product={product} />
+      </div>
 
       <div>
         {discussions.map((discussion) => (
