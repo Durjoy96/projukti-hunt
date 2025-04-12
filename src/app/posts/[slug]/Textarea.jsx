@@ -28,6 +28,7 @@ export default function Textarea({ product, parentId, setIsReplying }) {
     };
     axios.post("/api/discussions", commentInfo).then((res) => {
       setComment(""); //clear textarea
+      setIsReplying((prev) => !prev);
     });
   };
 

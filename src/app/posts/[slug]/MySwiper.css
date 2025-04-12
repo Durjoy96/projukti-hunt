@@ -5,9 +5,16 @@
 
 .swiper-button-prev,
 .swiper-button-next {
-  color: var(--color-base-200);
-  width: 20px;
-  height: 20px;
+  color: var(--color-base-content);
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-base-100);
+  border-radius: 100%;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 16px;
 }
 
 .swiper-pagination-bullet-active {
