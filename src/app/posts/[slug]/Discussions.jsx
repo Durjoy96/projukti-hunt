@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Textarea from "./Textarea";
 import Comment from "./Comment";
 import { pusherClient } from "@/lib/pusher";
+import firstCommentIcon from "@/assets/icons/refreshing-beverage.svg";
+import Image from "next/image";
 
 export default function Discussions({ product }) {
   const [discussions, setDiscussions] = useState([]);
@@ -96,14 +98,28 @@ export default function Discussions({ product }) {
       <div className="mt-12">
         <Textarea product={product} />
       </div>
-
-      <div>
-        {discussions.map((discussion) => (
-          <div key={discussion._id}>
-            <Comment discussion={discussion} product={product} />
+      {discussions.length > 0 ? (
+        <div>
+          {discussions.map((discussion) => (
+            <div key={discussion._id}>
+              <Comment discussion={discussion} product={product} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="py-14 md:py-14 bg-base-200 flex justify-center rounded-lg mt-8">
+          <div className="flex flex-col items-center gap-3">
+            <Image
+              src={firstCommentIcon}
+              alt="comment"
+              className="w-12 h-12 md:w-16 md:h-16"
+            />
+            <span className="text-base md:text-lg font-medium text-base-content">
+              Don’t be shy — comment firsts
+            </span>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </>
   );
 }
