@@ -36,7 +36,12 @@ export async function GET(req) {
     console.log("uid", uid);
     const client = await clientPromise;
     const db = client.db();
-    const user = await db.collection("users").findOne({ _id: uid });
+    const user = await db
+      .collection("users")
+      .findOne(
+        { _id: uid },
+        { projection: { name: 1, photo_url: 1, username: 1 } }
+      );
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
     console.error("Database error:", error);
