@@ -34,6 +34,7 @@ export default function SubmitProduct() {
     hunter: true,
     title: null,
     status: "pending",
+    createdAt: new Date().toISOString(),
   });
   console.log(submissionInfo);
   const submitBtnHandler = async () => {
@@ -114,6 +115,7 @@ export default function SubmitProduct() {
             hunter: true,
             title: null,
             status: "pending",
+            createdAt: new Date().toISOString(),
           });
         }
       })

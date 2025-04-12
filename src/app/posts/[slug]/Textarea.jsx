@@ -25,6 +25,7 @@ export default function Textarea({ product, parentId, setIsReplying }) {
       parentId: parentId || null,
       content: comment,
       userId: user.uid,
+      createdAt: new Date().toISOString(),
     };
     axios.post("/api/discussions", commentInfo).then((res) => {
       setComment(""); //clear textarea
