@@ -16,6 +16,7 @@ export async function POST(req) {
         }
       );
     }
+    user.username = user.email.split("@")[0];
     const result = await db.collection("users").insertOne(user);
     return NextResponse(result);
   } catch (error) {

@@ -41,7 +41,14 @@ export default function Comment({ discussion, product }) {
                 product.hunter === discussion.userId && <Hunter />
               )}
             </div>
-            <p className="mt-2 text-base-content-secondary text-base font-normal">
+
+            <p className="mt-2 text-base-content-secondary text-base font-normal whitespace-pre-wrap">
+              {discussion.mentions && (
+                <span className="text-primary font-medium">
+                  @{discussion.mentions}
+                </span> //display mentions
+              )}
+              &nbsp;&nbsp;
               {discussion.content}
             </p>
             <div className="mt-3">
@@ -55,6 +62,7 @@ export default function Comment({ discussion, product }) {
                 <Textarea
                   product={product}
                   parentId={discussion._id}
+                  username={discussion?.author?.username}
                   setIsReplying={setIsReplying}
                 />
               )}
