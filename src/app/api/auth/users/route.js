@@ -34,15 +34,21 @@ export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
     const uid = searchParams.get("uid");
-    console.log("uid", uid);
+    let username;
+    let query;
+    if (!uid) {
+      username = searchParams.get("username").split("%40")[0].split("@")[1];
+      console.log("username", username);
+      query = { username: username };
+    } else {
+      query = { _id: uid };
+    }
+
     const client = await clientPromise;
     const db = client.db();
-    const user = await db
-      .collection("users")
-      .findOne(
-        { _id: uid },
-        { projection: { name: 1, photo_url: 1, username: 1 } }
-      );
+    const user = await db.collection("users").findOne(query, {
+      projection: { name: 1, photo_url: 1, username: 1 },
+    });
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
     console.error("Database error:", error);
