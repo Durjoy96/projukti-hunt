@@ -36,7 +36,7 @@ export default function TodayProducts() {
 
   return (
     <>
-      <h1 className="text-2xl font-medium text-base-content">
+      <h1 className="text-xl md:text-2xl font-medium text-base-content">
         Top Bangladeshi Products Launching Today
       </h1>
       <div className="max-w-4xl mt-8 grid">
