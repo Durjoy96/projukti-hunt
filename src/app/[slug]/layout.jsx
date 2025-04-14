@@ -11,8 +11,15 @@ import React, { useEffect, useState } from "react";
 export default function Profile({ children }) {
   const { user } = useAuth();
   const { slug } = useParams();
+  const path = window.location.href;
   const [dbUser, setDbUser] = useState([]);
-  const [activeBtn, setActiveBtn] = useState("Upvotes");
+  const [activeBtn, setActiveBtn] = useState(
+    path.includes("products")
+      ? "Products"
+      : path.includes("discussions")
+      ? "Discussions"
+      : "Upvotes"
+  );
 
   useEffect(() => {
     axios.get(`/api/auth/users?username=${slug}`).then((res) => {

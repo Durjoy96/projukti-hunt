@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 export default function Discussions() {
   const { slug } = useParams();
   const [discussions, setDiscussions] = useState([]);
-
+  console.log(window.location.href);
   useEffect(() => {
     axios.get(`/api/profile/discussions?username=${slug}`).then((res) => {
       setDiscussions(() => res.data);
