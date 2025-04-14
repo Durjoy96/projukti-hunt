@@ -7,7 +7,7 @@ import Vote from "./Vote";
 export default function ProductCard({ product }) {
   return (
     <>
-      <Link href={`/posts/${product.title}`} key={product._id}>
+      <Link href={`/posts/${product.title}`}>
         <div className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out group">
           <div>
             <Image

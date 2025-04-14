@@ -31,6 +31,7 @@ export default function Profile({ children }) {
               width={100}
               height={100}
               className="rounded-full ring-primary"
+              alt="profile"
             />
             <div>
               <h3 className="text-2xl font-semibold text-base-content">
@@ -68,6 +69,18 @@ export default function Profile({ children }) {
               }`}
             >
               Products
+            </Button>
+          </Link>
+          <Link href={`/${slug.replace("%40", "@")}/discussions`}>
+            <Button
+              variant="outline"
+              onClick={() => setActiveBtn("Discussions")}
+              className={`rounded-full hover:text-primary hover:bg-primary/10 hover:border-transparent ${
+                activeBtn === "Discussions" &&
+                "text-primary bg-primary/10 border-transparent"
+              }`}
+            >
+              Discussions
             </Button>
           </Link>
         </div>
