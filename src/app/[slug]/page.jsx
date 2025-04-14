@@ -1,27 +1,16 @@
 "use client";
 
-import { useAuth } from "@/components/AuthProvider";
 import ProductCard from "@/components/ProductCard";
-import { Button } from "@/components/ui/button";
 import axios from "axios";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function Profile() {
-  const { user } = useAuth();
   const { slug } = useParams();
   const [upvotes, setUpvotes] = useState([]);
-  const [dbUser, setDbUser] = useState([]);
-  const [activeBtn, setActiveBtn] = useState("Upvotes");
 
   useEffect(() => {
-    axios.get(`/api/auth/users?username=${slug}`).then((res) => {
-      console.log(res.data);
-      setDbUser(() => res.data);
-    });
-
-    axios.get(`/api/profile?username=${slug}`).then((res) => {
+    axios.get(`/api/profile/upvotes?username=${slug}`).then((res) => {
       console.log(res);
       setUpvotes(() => res.data);
     });
