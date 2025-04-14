@@ -1,5 +1,6 @@
 "use client";
 
+import { timeAgo } from "@/lib/timeago";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -36,6 +37,9 @@ export default function Discussions() {
                 >
                   {discussion?.product?.product_name}
                 </Link>{" "}
+                <span className="text-sm font-normal text-base-content-secondary">
+                  {timeAgo(discussion.createdAt)}
+                </span>
               </span>
             ) : (
               <span className="font-medium text-base-content">
@@ -46,6 +50,9 @@ export default function Discussions() {
                 >
                   {discussion?.product?.product_name}
                 </Link>{" "}
+                <span className="text-sm font-normal text-base-content-secondary">
+                  {timeAgo(discussion.createdAt)}
+                </span>
               </span>
             )}
             <p className="whitespace-pre-wrap text-base font-normal text-base-content-secondary italic mt-2">
