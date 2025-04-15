@@ -30,12 +30,9 @@ export default function ProductDetails() {
   useEffect(() => {
     const channel = pusherClient.subscribe("votes");
     channel.bind("vote-updated", ({ productId, votes, voters }) => {
-      setProduct((prevProducts) =>
-        prevProducts._id === productId
-          ? { ...prevProducts, votes, voters }
-          : prevProducts
-      );
+      setProduct((prevProduct) => ({ ...prevProduct, votes, voters }));
     });
+    
     axios
       .get(`/api/products/details?title=${slug}`)
       .then((res) => {

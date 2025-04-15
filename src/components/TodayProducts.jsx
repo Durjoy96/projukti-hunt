@@ -1,12 +1,8 @@
 "use client";
 
 import axios from "axios";
-import { Dot, ExternalLinkIcon, Tags } from "lucide-react";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { pusherClient } from "@/lib/pusher";
-import Vote from "./Vote";
-import Link from "next/link";
 import ProductCard from "./ProductCard";
 
 export default function TodayProducts() {

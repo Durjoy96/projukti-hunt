@@ -1,26 +1,43 @@
 "use client";
 
 import ProductCard from "@/components/ProductCard";
+import { pusherClient } from "@/lib/pusher";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function Profile() {
   const { slug } = useParams();
-  const [upvotes, setUpvotes] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/profile/upvotes?username=${slug}`).then((res) => {
-      console.log(res);
-      setUpvotes(() => res.data);
+    const channel = pusherClient.subscribe("votes");
+    channel.bind("vote-updated", ({ productId, votes, voters }) => {
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product._id === productId ? { ...product, votes, voters } : product
+        )
+      );
     });
+
+    axios.get(`/api/profile/upvotes?username=${slug}`).then((res) => {
+      setProducts(() => res.data);
+    });
+
+    // Cleanup
+    return () => {
+      pusherClient.unsubscribe("votes");
+    };
   }, [slug]);
 
   return (
     <>
       {" "}
+      <h3 className="text-lg md:text-xl font-bold text-base-content mt-8">
+        {products.length} Upvotes
+      </h3>
       <div className="max-w-4xl mt-8 grid">
-        {upvotes.map((product) => (
+        {products.map((product) => (
           <ProductCard product={product} key={product._id} />
         ))}
       </div>

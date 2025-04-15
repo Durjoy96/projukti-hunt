@@ -12,16 +12,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { pusherClient } from "@/lib/pusher";
 
 export default function Products() {
   const { slug } = useParams();
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState([]);
+
   useEffect(() => {
+    const channel = pusherClient.subscribe("votes");
+    channel.bind("vote-updated", ({ productId, votes, voters }) => {
+      setFilter((prevProducts) =>
+        prevProducts.map((product) =>
+          product._id === productId ? { ...product, votes, voters } : product
+        )
+      );
+    });
+
     axios.get(`/api/profile/products?username=${slug}`).then((res) => {
       setProducts(() => res.data);
       setFilter(() => res.data);
     });
+
+    // Cleanup
+    return () => {
+      pusherClient.unsubscribe("votes");
+    };
   }, []);
 
   const valueChangeHandler = (e) => {
@@ -52,14 +68,20 @@ export default function Products() {
           {products.length} Submitted
         </h3>
         <Select defaultValue="all" onValueChange={valueChangeHandler}>
-          <SelectTrigger className="w-[100px]">
+          <SelectTrigger className="w-[100px] cursor-pointer">
             <SelectValue placeholder="Select an option" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="made">Made</SelectItem>
-              <SelectItem value="hunted">Hunted</SelectItem>
+              <SelectItem value="all" className="cursor-pointer">
+                All
+              </SelectItem>
+              <SelectItem value="made" className="cursor-pointer">
+                Made
+              </SelectItem>
+              <SelectItem value="hunted" className="cursor-pointer">
+                Hunted
+              </SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
