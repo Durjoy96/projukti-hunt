@@ -1,5 +1,6 @@
 "use client";
 
+import NoData from "@/components/NoData";
 import ProductCard from "@/components/ProductCard";
 import { pusherClient } from "@/lib/pusher";
 import axios from "axios";
@@ -32,10 +33,12 @@ export default function Profile() {
 
   return (
     <>
-      {" "}
-      <h3 className="text-lg md:text-xl font-bold text-base-content mt-8">
-        {products.length} Upvotes
-      </h3>
+      {!products.length && <NoData />}
+      {products.length < 0 && (
+        <h3 className="text-lg md:text-xl font-bold text-base-content mt-8">
+          {products.length} Upvotes
+        </h3>
+      )}
       <div className="max-w-4xl mt-8 grid">
         {products.map((product) => (
           <ProductCard product={product} key={product._id} />

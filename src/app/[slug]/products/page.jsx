@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { pusherClient } from "@/lib/pusher";
+import NoData from "@/components/NoData";
 
 export default function Products() {
   const { slug } = useParams();
@@ -63,29 +64,33 @@ export default function Products() {
 
   return (
     <>
-      <div className="flex justify-between items-center mt-8">
-        <h3 className="text-lg md:text-xl font-bold text-base-content">
-          {products.length} Submitted
-        </h3>
-        <Select defaultValue="all" onValueChange={valueChangeHandler}>
-          <SelectTrigger className="w-[100px] cursor-pointer">
-            <SelectValue placeholder="Select an option" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="all" className="cursor-pointer">
-                All
-              </SelectItem>
-              <SelectItem value="made" className="cursor-pointer">
-                Made
-              </SelectItem>
-              <SelectItem value="hunted" className="cursor-pointer">
-                Hunted
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+      {!products.length && <NoData />}
+      {products.length < 0 && (
+        <div className="flex justify-between items-center mt-8">
+          <h3 className="text-lg md:text-xl font-bold text-base-content">
+            {products.length} Submitted
+          </h3>
+          <Select defaultValue="all" onValueChange={valueChangeHandler}>
+            <SelectTrigger className="w-[100px] cursor-pointer">
+              <SelectValue placeholder="Select an option" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="all" className="cursor-pointer">
+                  All
+                </SelectItem>
+                <SelectItem value="made" className="cursor-pointer">
+                  Made
+                </SelectItem>
+                <SelectItem value="hunted" className="cursor-pointer">
+                  Hunted
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       <div className="max-w-4xl mt-8 grid">
         {filter.map((product) => (
           <ProductCard key={product._id} product={product} />
