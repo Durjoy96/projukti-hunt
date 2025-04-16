@@ -17,10 +17,13 @@ export default function TodayProducts() {
           product._id === productId ? { ...product, votes, voters } : product
         )
       );
+      setProducts((prevProducts) =>
+        [...prevProducts].sort((a, b) => b.votes - a.votes)
+      );
     });
 
     axios.get("/api/products/today").then((res) => {
-      setProducts(() => res.data);
+      setProducts(() => res.data.sort((a, b) => b.votes - a.votes));
       console.log("db", res.data);
     });
 
