@@ -65,7 +65,7 @@ export default function Products() {
   return (
     <>
       {!products.length && <NoData />}
-      {products.length < 0 && (
+      {products.length > 0 && (
         <div className="flex justify-between items-center mt-8">
           <h3 className="text-lg md:text-xl font-bold text-base-content">
             {products.length} Submitted
