@@ -20,8 +20,8 @@ export default function SuccessModal() {
           <p className="pt-2 text-base-content-secondary text-sm md:text-base lg:text-base">
             Thank you for submitting your product! Your submission has been
             received, and we’re excited to feature it. Your product will be
-            reviewed and published within a week. We’ll notify you as soon as it
-            goes live! Stay tuned! 🔔
+            reviewed and published within 24 hours. We’ll notify you as soon as
+            it goes live! Stay tuned! 🔔
           </p>
         </div>
       </dialog>
