@@ -20,7 +20,7 @@ export async function GET(req) {
     ];
 
     const posts = await db
-      .collection("submissions")
+      .collection("products")
       .find(
         { _id: { $in: postIds.map((post) => new ObjectId(post)) } },
         { projection: { product_name: 1, title: 1 } }

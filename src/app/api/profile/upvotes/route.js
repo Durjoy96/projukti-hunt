@@ -10,7 +10,7 @@ export async function GET(req) {
     const user = await db.collection("users").findOne({ username: username });
 
     const upvotes = await db
-      .collection("submissions")
+      .collection("products")
       .find({ voters: user._id })
       .toArray();
 

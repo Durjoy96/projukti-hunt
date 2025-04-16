@@ -10,7 +10,7 @@ export async function GET(req) {
     const query = {
       title: title,
     };
-    const result = await db.collection("submissions").findOne(query);
+    const result = await db.collection("products").findOne(query);
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error("Error fetching product details:", error);

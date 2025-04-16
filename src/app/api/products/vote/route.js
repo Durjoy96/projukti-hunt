@@ -10,7 +10,7 @@ export async function POST(req) {
     const client = await clientPromise;
     const db = client.db();
 
-    const isVoted = await db.collection("submissions").findOne({
+    const isVoted = await db.collection("products").findOne({
       _id: new ObjectId(productId),
       voters: userId,
     });
@@ -19,7 +19,7 @@ export async function POST(req) {
 
     if (isVoted) {
       result = await db
-        .collection("submissions")
+        .collection("products")
         .findOneAndUpdate(
           { _id: new ObjectId(productId) },
           { $inc: { votes: -1 }, $pull: { voters: userId } },
@@ -27,7 +27,7 @@ export async function POST(req) {
         );
     } else {
       result = await db
-        .collection("submissions")
+        .collection("products")
         .findOneAndUpdate(
           { _id: new ObjectId(productId) },
           { $inc: { votes: 1 }, $push: { voters: userId } },
