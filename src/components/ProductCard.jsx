@@ -4,12 +4,13 @@ import Link from "next/link";
 import React from "react";
 import Vote from "./Vote";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, idx }) {
   const path = window.location.href.includes("@");
   return (
     <>
       <Link href={`/posts/${product.title}`}>
         <div className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out group">
+          {" "}
           <div>
             <Image
               src={product.logo_url}
@@ -23,7 +24,7 @@ export default function ProductCard({ product }) {
             <div>
               <div className="flex items-center gap-2 group-hover:text-primary">
                 <h3 className="text-base md:text-lg font-medium text-base-content group-hover:text-primary">
-                  {product.product_name}
+                  {!isNaN(idx) && idx + 1 + "."} {product.product_name}
                 </h3>
                 <ExternalLinkIcon
                   className="w-4 h-4 hidden group-hover:flex"

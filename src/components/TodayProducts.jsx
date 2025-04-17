@@ -39,8 +39,8 @@ export default function TodayProducts() {
         Top Bangladeshi Products Launching Today
       </h1>
       <div className="max-w-4xl mt-8 grid">
-        {products.map((product) => (
-          <ProductCard product={product} key={product._id} />
+        {products.map((product, idx) => (
+          <ProductCard product={product} idx={idx} key={product._id} />
         ))}
       </div>
     </>
