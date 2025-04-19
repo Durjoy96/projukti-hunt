@@ -1,3 +1,5 @@
+import { createAuthCookie } from "@/lib/cookie";
+import { signToken } from "@/lib/jwt";
 import clientPromise from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
@@ -8,20 +10,66 @@ export async function POST(req) {
     const user = await req.json();
     const query = { email: user.email };
     const isExist = await db.collection("users").findOne(query);
+    const isProd = process.env.NODE_ENV === "production";
+
     if (isExist) {
-      return new NextResponse(
-        { error: "User already exists" },
+      // Generate token for existing user
+      const token = signToken({
+        uid: isExist._id,
+        email: isExist.email,
+      });
+
+      const cookie = createAuthCookie(token);
+
+      const res = new NextResponse(
+        JSON.stringify({ message: "Login success" }),
         {
-          status: 409,
+          status: 200,
         }
       );
+
+      res.headers.set(
+        "Access-Control-Allow-Origin",
+        `${
+          isProd ? "https://projukti-hunt.vercel.app" : "http://localhost:3000"
+        }`
+      ); // frontend URLs
+      res.headers.set("Access-Control-Allow-Credentials", "true"); // allow credentials
+      res.headers.set("Set-Cookie", cookie);
+
+      return res;
     }
+
+    //create new user
     user.username = user.email.split("@")[0];
-    const result = await db.collection("users").insertOne(user);
-    return NextResponse(result);
+    await db.collection("users").insertOne(user);
+
+    // Generate token for new user
+    const token = signToken({
+      uid: user._id,
+      email: user.email,
+    });
+
+    const cookie = createAuthCookie(token);
+
+    const res = new NextResponse(
+      JSON.stringify({ message: "Sign up success" }),
+      {
+        status: 200,
+      }
+    );
+
+    res.headers.set(
+      "Access-Control-Allow-Origin",
+      `${isProd ? "https://projukti-hunt.vercel.app" : "http://localhost:3000"}`
+    ); // frontend URL
+    res.headers.set("Access-Control-Allow-Credentials", "true"); // allow credentials
+    res.headers.set("Set-Cookie", cookie);
+
+    return res;
   } catch (error) {
     console.error("Database error:", error);
-    return new NextResponse(
+    return NextResponse.json(
       { error: "Failed to create user" },
       {
         status: 500,

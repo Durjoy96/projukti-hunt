@@ -19,7 +19,9 @@ export default function ContinueWithGoogle() {
           photo_url: res.user.photoURL,
           creation_time: res.user.metadata.creationTime,
         };
-        axios.post("/api/auth/users", user); //store user data to the database
+        axios
+          .post("/api/auth/users", user, { withCredentials: true })
+          .then((res) => console.log(res)); //store user data to the database
       })
       .catch((error) => toast.error(error.message));
   };
