@@ -24,13 +24,15 @@ export async function POST(req) {
       const res = NextResponse.json({ message: "Login success" });
 
       res.headers.set("Set-Cookie", cookie);
-      res.headers.set(
-        "Access-Control-Allow-Origin",
-        process.env.NODE_ENV === "production"
-          ? "https://projukti-hunt.vercel.app"
-          : "http://localhost:3000"
-      );
-      res.headers.set("Access-Control-Allow-Credentials", "true");
+
+      // Add CORS headers for production
+      if (isProd === "production") {
+        response.headers.set("Access-Control-Allow-Credentials", "true");
+        response.headers.set(
+          "Access-Control-Allow-Origin",
+          process.env.NEXT_PUBLIC_URL
+        );
+      }
 
       return res;
     }
@@ -50,13 +52,15 @@ export async function POST(req) {
     const res = NextResponse.json({ message: "Login success" });
 
     res.headers.set("Set-Cookie", cookie);
-    res.headers.set(
-      "Access-Control-Allow-Origin",
-      process.env.NODE_ENV === "production"
-        ? "https://projukti-hunt.vercel.app"
-        : "http://localhost:3000"
-    );
-    res.headers.set("Access-Control-Allow-Credentials", "true");
+
+    // Add CORS headers for production
+    if (isProd === "production") {
+      response.headers.set("Access-Control-Allow-Credentials", "true");
+      response.headers.set(
+        "Access-Control-Allow-Origin",
+        process.env.NEXT_PUBLIC_URL
+      );
+    }
 
     return res;
   } catch (error) {
