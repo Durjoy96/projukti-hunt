@@ -26,7 +26,7 @@ export async function POST(req) {
       res.headers.set("Set-Cookie", cookie);
 
       // Add CORS headers for production
-      if (isProd === "production") {
+      if (isProd) {
         response.headers.set("Access-Control-Allow-Credentials", "true");
         response.headers.set(
           "Access-Control-Allow-Origin",
@@ -54,7 +54,7 @@ export async function POST(req) {
     res.headers.set("Set-Cookie", cookie);
 
     // Add CORS headers for production
-    if (isProd === "production") {
+    if (isProd) {
       response.headers.set("Access-Control-Allow-Credentials", "true");
       response.headers.set(
         "Access-Control-Allow-Origin",
