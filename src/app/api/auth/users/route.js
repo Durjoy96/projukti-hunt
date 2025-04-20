@@ -4,6 +4,13 @@ import clientPromise from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
+  console.log("🌐 ENV:", process.env.NODE_ENV);
+  console.log("📥 Headers:", JSON.stringify(Object.fromEntries(req.headers)));
+  console.log(
+    "🍪 Cookies before setting:",
+    req.cookies.getAll?.() || "No getAll() method"
+  );
+
   try {
     const client = await clientPromise;
     const db = client.db();
