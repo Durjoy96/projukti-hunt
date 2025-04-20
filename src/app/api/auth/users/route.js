@@ -21,21 +21,16 @@ export async function POST(req) {
 
       const cookie = createAuthCookie(token);
 
-      const res = new NextResponse(
-        JSON.stringify({ message: "Login success" }),
-        {
-          status: 200,
-        }
-      );
+      const res = NextResponse.json({ message: "Login success" });
 
+      res.headers.set("Set-Cookie", cookie);
       res.headers.set(
         "Access-Control-Allow-Origin",
-        `${
-          isProd ? "https://projukti-hunt.vercel.app" : "http://localhost:3000"
-        }`
-      ); // frontend URLs
-      res.headers.set("Access-Control-Allow-Credentials", "true"); // allow credentials
-      res.headers.set("Set-Cookie", cookie);
+        process.env.NODE_ENV === "production"
+          ? "https://projukti-hunt.vercel.app"
+          : "http://localhost:3000"
+      );
+      res.headers.set("Access-Control-Allow-Credentials", "true");
 
       return res;
     }
@@ -52,19 +47,16 @@ export async function POST(req) {
 
     const cookie = createAuthCookie(token);
 
-    const res = new NextResponse(
-      JSON.stringify({ message: "Sign up success" }),
-      {
-        status: 200,
-      }
-    );
+    const res = NextResponse.json({ message: "Login success" });
 
+    res.headers.set("Set-Cookie", cookie);
     res.headers.set(
       "Access-Control-Allow-Origin",
-      `${isProd ? "https://projukti-hunt.vercel.app" : "http://localhost:3000"}`
-    ); // frontend URL
-    res.headers.set("Access-Control-Allow-Credentials", "true"); // allow credentials
-    res.headers.set("Set-Cookie", cookie);
+      process.env.NODE_ENV === "production"
+        ? "https://projukti-hunt.vercel.app"
+        : "http://localhost:3000"
+    );
+    res.headers.set("Access-Control-Allow-Credentials", "true");
 
     return res;
   } catch (error) {
