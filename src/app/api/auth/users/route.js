@@ -4,20 +4,12 @@ import clientPromise from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  console.log("🌐 ENV:", process.env.NODE_ENV);
-  console.log("📥 Headers:", JSON.stringify(Object.fromEntries(req.headers)));
-  console.log(
-    "🍪 Cookies before setting:",
-    req.cookies.getAll?.() || "No getAll() method"
-  );
-
   try {
     const client = await clientPromise;
     const db = client.db();
     const user = await req.json();
     const query = { email: user.email };
     const isExist = await db.collection("users").findOne(query);
-    const isProd = process.env.NODE_ENV === "production";
 
     if (isExist) {
       // Generate token for existing user
@@ -29,18 +21,7 @@ export async function POST(req) {
       const cookie = createAuthCookie(token);
 
       const res = NextResponse.json({ message: "Login success" });
-
       res.headers.set("Set-Cookie", cookie);
-
-      // Add CORS headers for production
-      if (isProd) {
-        response.headers.set("Access-Control-Allow-Credentials", "true");
-        response.headers.set(
-          "Access-Control-Allow-Origin",
-          process.env.NEXT_PUBLIC_URL
-        );
-      }
-
       return res;
     }
 
@@ -57,18 +38,7 @@ export async function POST(req) {
     const cookie = createAuthCookie(token);
 
     const res = NextResponse.json({ message: "Login success" });
-
     res.headers.set("Set-Cookie", cookie);
-
-    // Add CORS headers for production
-    if (isProd) {
-      response.headers.set("Access-Control-Allow-Credentials", "true");
-      response.headers.set(
-        "Access-Control-Allow-Origin",
-        process.env.NEXT_PUBLIC_URL
-      );
-    }
-
     return res;
   } catch (error) {
     console.error("Database error:", error);
