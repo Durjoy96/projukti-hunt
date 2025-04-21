@@ -10,6 +10,7 @@ export async function POST(req) {
     const user = await req.json();
     const query = { email: user.email };
     const isExist = await db.collection("users").findOne(query);
+    const isProd = process.env.NODE_ENV === "production";
 
     if (isExist) {
       // Generate token for existing user
@@ -18,11 +19,9 @@ export async function POST(req) {
         email: isExist.email,
       });
 
-      const cookie = createAuthCookie(token);
+      await createAuthCookie(token);
 
-      const res = NextResponse.json({ message: "Login success" });
-      res.headers.set("Set-Cookie", cookie);
-      return res;
+      return NextResponse.json({ message: "Login success" });
     }
 
     //create new user
@@ -35,11 +34,9 @@ export async function POST(req) {
       email: user.email,
     });
 
-    const cookie = createAuthCookie(token);
+    await createAuthCookie(token);
 
-    const res = NextResponse.json({ message: "Login success" });
-    res.headers.set("Set-Cookie", cookie);
-    return res;
+    return NextResponse.json({ message: "Login success" });
   } catch (error) {
     console.error("Database error:", error);
     return NextResponse.json(

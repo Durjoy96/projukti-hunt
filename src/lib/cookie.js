@@ -1,14 +1,19 @@
-import { serialize } from "cookie";
+import { cookies } from "next/headers";
 
 const isProd = process.env.NODE_ENV === "production";
 
-export function createAuthCookie(token) {
-  return serialize("authToken", token, {
+export async function createAuthCookie(token) {
+  if (!token) {
+    throw new Error("Token is required to create a cookie");
+  }
+
+  return (await cookies()).set({
+    name: "authToken",
+    value: token,
     httpOnly: true,
-    secure: isProd, //  dynamic based on environment
-    sameSite: "lax", // Changed for cross-origin requests
+    secure: isProd,
+    sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24, // 1 day
-    // domain: isProd ? process.env.NEXT_PUBLIC_DOMAIN : "localhost", // Add your domain
+    maxAge: 60 * 60 * 24, // 1 days
   });
 }
