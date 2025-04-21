@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { pusherClient } from "@/lib/pusher";
 import ProductCard from "./ProductCard";
 
-export default function TodayProducts() {
+export default function Products({ endpoint }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function TodayProducts() {
       );
     });
 
-    axios.get("/api/products/today").then((res) => {
+    axios.get(`/api/products/${endpoint}`).then((res) => {
       setProducts(() => res.data.sort((a, b) => b.votes - a.votes));
       console.log("db", res.data);
     });
@@ -35,9 +35,6 @@ export default function TodayProducts() {
 
   return (
     <>
-      <h1 className="text-xl md:text-2xl font-medium text-base-content">
-        Top Bangladeshi Products Launching Today
-      </h1>
       <div className="max-w-4xl mt-8 grid">
         {products.map((product, idx) => (
           <ProductCard product={product} idx={idx} key={product._id} />
