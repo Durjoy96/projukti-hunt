@@ -1,101 +1,278 @@
 [
   {
-    "category": "Tech & Software",
+    "category": "Work & Productivity",
     "subcategories": [
-      "SaaS & B2B Tools",
-      "Mobile Apps",
-      "AI & Automation",
-      "Productivity Tools",
-      "Web Development & Design",
-      "Fintech & Payments",
-      "Cybersecurity",
-      "Open Source Projects"
+      "AI Notetakers",
+      "Ad Blockers",
+      "App Switchers",
+      "Calendar Apps",
+      "Compliance Software",
+      "Customer Support Tools",
+      "E-signature Apps",
+      "Email Clients",
+      "File Storage & Sharing Apps",
+      "Hiring Software",
+      "Knowledge Base Software",
+      "Legal Services",
+      "Meeting Software",
+      "Note & Writing Apps",
+      "PDF Editors",
+      "Password Managers",
+      "Presentation Software",
+      "Product Demo Tools",
+      "Project Management Software",
+      "Resume Tools",
+      "Scheduling Software",
+      "Screenshots & Screen Recording Apps",
+      "Search Tools",
+      "Security Software",
+      "Spreadsheets",
+      "Team Collaboration Software",
+      "Time Tracking Apps",
+      "Video Conferencing Tools",
+      "Virtual Office Platforms",
+      "Web Browsers",
+      "Writing Assistants"
     ]
   },
   {
-    "category": "E-commerce & Shopping",
+    "category": "Engineering & Development",
     "subcategories": [
-      "Online Stores & Marketplaces",
-      "Fashion & Apparel",
-      "Handicrafts & Local Products",
-      "Home & Lifestyle",
-      "Food & Beverages"
+      "A/B Testing Tools",
+      "AI Coding Assistants",
+      "Authentication & Identity Tools",
+      "Automation Tools",
+      "Content Management Systems",
+      "Cloud Computing Platforms",
+      "Code Review Tools",
+      "Code Editors",
+      "Command Line Tools",
+      "Data Analysis Tools",
+      "Data Visualization Tools",
+      "Databases & Backend Frameworks",
+      "Git Clients",
+      "Headless CMS Software",
+      "Issue Tracking Software",
+      "Membership Software",
+      "No-code Platforms",
+      "Observability Tools",
+      "Standup Bots",
+      "Static Site Generators",
+      "Testing & QA Software",
+      "Unified API",
+      "VPN Clients",
+      "Video Hosting Platforms",
+      "Web Hosting Services",
+      "Website Analytics",
+      "Website Builders"
     ]
   },
   {
-    "category": "Finance & Investment",
+    "category": "Design & Creative",
     "subcategories": [
-      "Personal Finance",
-      "Crypto & Web3",
-      "Stock Market & Trading",
-      "Loan & Credit Services"
+      "3D & Animation",
+      "Background Removal Tools",
+      "Camera Apps",
+      "Design Inspiration Websites",
+      "Design Mockups",
+      "Design Resources",
+      "Digital Whiteboards",
+      "Graphic Design Tools",
+      "Icon Sets",
+      "Interface Design Tools",
+      "Mobile Editing Apps",
+      "Photo Editing",
+      "Podcasting",
+      "Social Audio Apps",
+      "Space Design Apps",
+      "Stock Photo Sites",
+      "UI Frameworks",
+      "User Research Tools",
+      "Video Editing",
+      "Wallpapers",
+      "Wireframing"
     ]
   },
   {
-    "category": "Startups & Entrepreneurship",
+    "category": "Finance",
     "subcategories": [
-      "Local Startups",
-      "Business Services",
-      "Co-working Spaces",
-      "Funding & Investors"
+      "Accounting Software",
+      "Budgeting Apps",
+      "Credit Score Tools",
+      "Financial Planning",
+      "Fundraising Resources",
+      "Investing",
+      "Invoicing Tools",
+      "Money Transfer",
+      "Neobanks",
+      "Online Banking",
+      "Payroll Software",
+      "Remote Workforce Tools",
+      "Retirement Planning",
+      "Savings Apps",
+      "Startup Financial Planning",
+      "Startup Incorporation",
+      "Stock Trading Platforms",
+      "Tax Preparation",
+      "Treasury Management Platforms"
     ]
   },
   {
-    "category": "Education & Learning",
+    "category": "Social & Community",
     "subcategories": [
-      "Online Courses & EdTech",
+      "Blogging Platforms",
+      "Community Management",
+      "Dating Apps",
+      "Link in Bio Tools",
+      "Live Streaming Platforms",
+      "Messaging Apps",
+      "Microblogging Platforms",
+      "Newsletter Platforms",
+      "Photo Sharing",
+      "Professional Networking Platforms",
+      "Safety and Privacy Platforms",
+      "Social Networking",
+      "Social Bookmarking",
+      "Video and Voice Calling"
+    ]
+  },
+  {
+    "category": "Marketing & Sales",
+    "subcategories": [
+      "Advertising Tools",
+      "Affiliate Marketing",
+      "Best SEO Tools",
+      "Business Intelligence Software",
+      "CRM Software",
+      "Customer Loyalty Platforms",
+      "Email Marketing",
+      "Influencer Marketing Platforms",
+      "Keyword Research Tools",
+      "Landing Page Builders",
+      "Lead Generation Software",
+      "Marketing Automation Platforms",
+      "Sales Enablement",
+      "Sales Training",
+      "Social Media Management Tools",
+      "Social Media Scheduling Tools",
+      "Survey and Form Builders"
+    ]
+  },
+  {
+    "category": "AI",
+    "subcategories": [
+      "AI Characters",
+      "AI Chatbots",
+      "AI Content Detection",
+      "AI Databases",
+      "AI Generative Art",
+      "AI Headshot Generators",
+      "AI Infrastructure Tools",
+      "AI Metrics and Evaluation",
+      "AI Voice Agents",
+      "Avatar Generators",
+      "ChatGPT Prompts",
+      "LLMs",
+      "Predictive AI",
+      "Text-to-Speech"
+    ]
+  },
+  {
+    "category": "Health & Fitness",
+    "subcategories": [
+      "Activity Tracking",
+      "Camping Apps",
+      "Health Insurance",
+      "Hiking Apps",
+      "Medical",
+      "Meditation Apps",
+      "Mental Health",
+      "Senior Care",
+      "Sleep Apps",
+      "Therapy Apps",
+      "Workout Platforms"
+    ]
+  },
+  {
+    "category": "Travel",
+    "subcategories": [
+      "Flight Booking Apps",
+      "Hotel Booking Apps",
+      "Maps and GPS",
+      "Outdoors Platforms",
+      "Short Term Rentals",
+      "Travel Insurance",
+      "Travel Planning",
+      "Travel Apps",
+      "Weather Apps"
+    ]
+  },
+  {
+    "category": "Platforms",
+    "subcategories": [
+      "Crowdfunding",
+      "Event Software",
+      "Job Boards",
       "Language Learning",
-      "Skill Development",
-      "College & School Resources"
+      "News",
+      "Online Learning",
+      "Real Estate",
+      "Startup Communities",
+      "Virtual Events"
     ]
   },
   {
-    "category": "Jobs & Career",
+    "category": "Product add-ons",
     "subcategories": [
-      "Job Boards & Hiring Platforms",
-      "Freelancing & Remote Work",
-      "Resume & Interview Prep"
+      "Chrome Extensions",
+      "Figma Plugins",
+      "Figma Templates",
+      "Notion Templates",
+      "Slack Apps",
+      "Twitter Apps",
+      "WordPress Plugins",
+      "WordPress Themes"
     ]
   },
   {
-    "category": "Entertainment & Media",
+    "category": "Web3",
     "subcategories": [
-      "Streaming Services",
-      "Podcasts & Audio Apps",
-      "News & Magazines",
-      "Social Media & Influencers"
+      "Crypto Exchanges",
+      "Crypto Tools",
+      "Crypto Wallets",
+      "DAOs",
+      "DeFi",
+      "NFT Creation Tools",
+      "NFT Marketplaces"
     ]
   },
   {
-    "category": "Health & Wellness",
+    "category": "Physical Products",
     "subcategories": [
-      "Telemedicine & Doctor Booking",
-      "Fitness & Diet",
-      "Mental Health"
+      "Books",
+      "Fitness",
+      "Furniture",
+      "Games",
+      "Toys",
+      "Wearables",
+      "Webcams"
     ]
   },
   {
-    "category": "Environment & Agriculture",
+    "category": "Ecommerce",
     "subcategories": [
-      "Organic & Sustainable Products",
-      "Farming & AgriTech",
-      "Gardening & Landscaping"
+      "Ecommerce platforms",
+      "Marketplace sites",
+      "Payment processors",
+      "Shopify Apps"
     ]
   },
   {
-    "category": "Real Estate & Housing",
-    "subcategories": [
-      "Property Listings",
-      "Interior Design & Renovation",
-      "Rental & PG Services"
-    ]
+    "category": "Family",
+    "subcategories": ["Apps for kids", "Family Care", "Pregnancy apps"]
   },
   {
-    "category": "Travel & Transportation",
-    "subcategories": [
-      "Ride-Sharing & Logistics",
-      "Flight & Hotel Booking",
-      "Local Travel Guides"
-    ]
+    "category": "Lifestyle",
+    "subcategories": ["Shopping"]
   }
 ]
