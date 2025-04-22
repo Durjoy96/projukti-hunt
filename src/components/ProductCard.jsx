@@ -11,16 +11,16 @@ export default function ProductCard({ product, idx }) {
       <Link href={`/posts/${product.title}`}>
         <div className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out group">
           {" "}
-          <div>
+          <div className="w-14 h-14">
             <Image
               src={product.logo_url}
               width={path ? 96 : 48}
               height={path ? 96 : 48}
               alt={product.product_name}
-              className="rounded-lg"
+              className="rounded-lg w-full h-full object-cover"
             />
           </div>
-          <div className="flex justify-between items-start w-full gap-6">
+          <div className="flex justify-between items-start w-full md:gap-6">
             <div>
               <div className="flex items-center gap-2 group-hover:text-primary">
                 <h3 className="text-base md:text-lg font-medium text-base-content group-hover:text-primary">
@@ -31,7 +31,7 @@ export default function ProductCard({ product, idx }) {
                   onClick={() => window.open(product.web_app_link, "_blank")}
                 />
               </div>
-              <p className="text-sm md:text-base font-normal text-base-content-secondary">
+              <p className="text-sm md:text-base font-normal text-base-content-secondary truncate max-w-[170px] md:max-w-2xl">
                 {product.tagline}
               </p>
               {/* categories */}
