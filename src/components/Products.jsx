@@ -6,9 +6,11 @@ import { pusherClient } from "@/lib/pusher";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import CardSkeleton from "./CardSkeleton";
 
 export default function Products({ endpoint }) {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Subscribe to Pusher channel
@@ -26,6 +28,7 @@ export default function Products({ endpoint }) {
 
     axios.get(`/api/products/${endpoint}`).then((res) => {
       setProducts(() => res.data.sort((a, b) => b.votes - a.votes));
+      setLoading(false);
     });
 
     // Cleanup
@@ -37,9 +40,10 @@ export default function Products({ endpoint }) {
   return (
     <>
       <div className="max-w-4xl mt-8 grid">
+        {/* no products */}
         {products.length === 0 && (
           <div>
-            {endpoint === "today" && (
+            {endpoint === "today" && loading === false && (
               <div>
                 <p className="text-base-content-secondary text-base -mt-6">
                   No products launched today.
@@ -49,23 +53,28 @@ export default function Products({ endpoint }) {
                 </Link>
               </div>
             )}
-            {endpoint === "yesterday" && (
+            {endpoint === "yesterday" && loading === false && (
               <p className="text-base-content-secondary text-base -mt-6">
                 No products launched yesterday.
               </p>
             )}
-            {endpoint === "last-weeks" && (
+            {endpoint === "last-weeks" && loading === false && (
               <p className="text-base-content-secondary text-base -mt-6">
                 No products launched last week.
               </p>
             )}
-            {endpoint === "last-months" && (
+            {endpoint === "last-months" && loading === false && (
               <p className="text-base-content-secondary text-base -mt-6">
                 No products launched last month.
               </p>
             )}
           </div>
         )}
+
+        {/* loading skeleton */}
+        {loading && <CardSkeleton />}
+
+        {/* products */}
         {products.map((product, idx) => (
           <ProductCard product={product} idx={idx} key={product._id} />
         ))}
