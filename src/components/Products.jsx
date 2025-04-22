@@ -26,7 +26,6 @@ export default function Products({ endpoint }) {
 
     axios.get(`/api/products/${endpoint}`).then((res) => {
       setProducts(() => res.data.sort((a, b) => b.votes - a.votes));
-      console.log("db", res.data);
     });
 
     // Cleanup
@@ -42,29 +41,26 @@ export default function Products({ endpoint }) {
           <div>
             {endpoint === "today" && (
               <div>
-                <h2 className="text-base-content text-xl font-medium">
+                <p className="text-base-content-secondary text-base -mt-6">
                   No products launched today.
-                </h2>
-                <p className="text-base-content-secondary text-base mt-1">
-                  Come back later or launch yours now!
                 </p>
-                <Link href="/posts/new" className="mt-4 inline-block">
+                <Link href="/posts/new" className="mt-6 inline-block">
                   <Button>Launch a Product</Button>
                 </Link>
               </div>
             )}
             {endpoint === "yesterday" && (
-              <p className="text-base-content-secondary text-base mt-1">
+              <p className="text-base-content-secondary text-base -mt-6">
                 No products launched yesterday.
               </p>
             )}
             {endpoint === "last-weeks" && (
-              <p className="text-base-content-secondary text-base mt-1">
+              <p className="text-base-content-secondary text-base -mt-6">
                 No products launched last week.
               </p>
             )}
             {endpoint === "last-months" && (
-              <p className="text-base-content-secondary text-base mt-1">
+              <p className="text-base-content-secondary text-base -mt-6">
                 No products launched last month.
               </p>
             )}
