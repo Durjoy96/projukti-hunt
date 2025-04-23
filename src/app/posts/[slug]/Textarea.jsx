@@ -1,7 +1,7 @@
 import { useAuth } from "@/components/AuthProvider";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { CircleX } from "lucide-react";
+import { Check, CircleX, Loader2 } from "lucide-react";
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -15,8 +15,10 @@ export default function Textarea({
   const textareaRef = useRef(null);
   const [comment, setComment] = useState("");
   const [mentioning, setMentioning] = useState(parentId && true);
+  const [loading, setLoading] = useState(false);
 
   const onComment = () => {
+    setLoading(true); //start loading
     if (!user) {
       document.getElementById("sign_in_modal").showModal();
       return;
@@ -42,10 +44,21 @@ export default function Textarea({
       delete commentInfo.mentions;
     }
 
-    axios.post("/api/discussions", commentInfo).then((res) => {
-      setComment(""); //clear textarea
-      setIsReplying((prev) => !prev);
-    });
+    axios
+      .post("/api/discussions", commentInfo)
+      .then(() => {
+        setComment(""); //clear textarea
+        setLoading("done"); //display done icon
+
+        setTimeout(() => {
+          parentId && setIsReplying((prev) => !prev); //close the reply textarea
+          setLoading(false);
+        }, 2000); //stop loading after 1 second
+      })
+      .catch((error) => {
+        toast.error(error.message || "Failed to comment");
+        setLoading(false); //stop loading
+      });
   };
 
   const handleChange = (e) => {
@@ -94,8 +107,22 @@ export default function Textarea({
           </button>
         )}
 
-        <Button onClick={onComment} variant="outline">
-          Comment
+        <Button onClick={onComment} variant="outline" disabled={loading}>
+          {/* default button text */}
+          {loading === false && "Comment"}
+          {/* loading button text */}
+          {loading === true && (
+            <div className="flex items-center gap-2">
+              <Loader2 className="animate-spin" /> Comment
+            </div>
+          )}
+          {/* done button text */}
+          {loading === "done" && (
+            <div className="flex items-center gap-2">
+              <Check className="animate-pulse" />
+              Commented!
+            </div>
+          )}
         </Button>
       </div>
     </div>

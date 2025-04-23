@@ -32,6 +32,7 @@ export default function Vote({ product }) {
       }
       if (!response.data.success) {
         toast.error(response.data.error || "Failed to vote");
+        setLoading(false);
       }
     } catch (error) {
       toast.error(error.response?.data?.error || "Failed to vote");
