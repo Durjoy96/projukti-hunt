@@ -14,10 +14,23 @@ import {
 import { useAuth } from "@/components/AuthProvider";
 import { CirclePlus, LogIn } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function NavbarEnd() {
   const { user, logout } = useAuth();
-  console.log(user);
+  const [dbUser, setDbUser] = useState(null);
+  useEffect(() => {
+    axios
+      .get(`/api/auth/users?uid=${user && user?.uid}`)
+      .then((res) => {
+        setDbUser(res.data);
+      })
+      .catch((error) => {
+        toast.error(error.response?.data?.error || "Failed to fetch user data");
+      });
+  }, [user]);
   return (
     <>
       {" "}
@@ -47,12 +60,13 @@ export default function NavbarEnd() {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>{user.displayName}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
+                <Link href={`/@${dbUser?.username}`}>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Profile
+                  </DropdownMenuItem>
+                </Link>
                 <DropdownMenuItem className="cursor-pointer" onClick={logout}>
                   Logout
                 </DropdownMenuItem>
