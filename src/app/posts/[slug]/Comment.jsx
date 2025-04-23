@@ -68,7 +68,7 @@ export default function Comment({ discussion, product }) {
                 >
                   <MessageCircle className="w-4.5 h-4.5 stroke-[1.5]" /> Reply
                 </button>
-                <span className="flex items-center gap-1 text-sm font-light text-base-content-secondary">
+                <span className="flex items-center gap-1 text-sm font-normal text-base-content-secondary">
                   <Clock className="w-4.5 h-4.5 stroke-[1.5]" />
                   {timeAgo(discussion.createdAt)}
                 </span>

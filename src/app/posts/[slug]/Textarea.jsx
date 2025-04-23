@@ -21,10 +21,12 @@ export default function Textarea({
     setLoading(true); //start loading
     if (!user) {
       document.getElementById("sign_in_modal").showModal();
+      setLoading(false); //stop loading
       return;
     } // no comment is allowed without signin
 
     if (!comment) {
+      setLoading(false); //stop loading
       toast.error("Oops! No text entered");
       return;
     } // no content alert
