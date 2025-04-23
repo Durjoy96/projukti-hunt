@@ -43,16 +43,21 @@ export default function Vote({ product }) {
     <>
       {path === "posts" ? (
         <Button
+          disabled={loading}
           onClick={(e) => handleVote(e, product._id)}
           className="flex items-center gap-2 font-medium text-primary-content hover:border-primary hover:text-primary-content"
         >
-          <Triangle
-            className={`w-20 h-20 stroke-primary-content ${
-              product.voters &&
-              product?.voters.some((voter) => voter === user?.uid) &&
-              "stroke-primary-content fill-primary-content"
-            }`}
-          />{" "}
+          {loading ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            <Triangle
+              className={`w-20 h-20 stroke-primary-content ${
+                product.voters &&
+                product?.voters.some((voter) => voter === user?.uid) &&
+                "stroke-primary-content fill-primary-content"
+              }`}
+            />
+          )}{" "}
           <span>
             {product.voters &&
             product?.voters.some((voter) => voter === user?.uid)
