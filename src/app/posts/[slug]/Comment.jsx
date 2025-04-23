@@ -4,6 +4,7 @@ import Textarea from "./Textarea";
 import { MessageCircle } from "lucide-react";
 import Maker from "@/components/Maker";
 import Hunter from "@/components/Hunter";
+import Link from "next/link";
 
 export default function Comment({ discussion, product }) {
   const [isReplying, setIsReplying] = useState(false);
@@ -23,18 +24,22 @@ export default function Comment({ discussion, product }) {
         }`}
       >
         <div className="flex items-start gap-2">
-          <Image
-            src={discussion?.author?.photo_url}
-            width={32}
-            height={32}
-            alt={discussion?.author?.name}
-            className="rounded-full"
-          />
+          <Link href={`/@${discussion?.author?.username}`}>
+            <Image
+              src={discussion?.author?.photo_url}
+              width={32}
+              height={32}
+              alt={discussion?.author?.name}
+              className="rounded-full"
+            />
+          </Link>
           <div className="w-full pb-4">
             <div className="flex items-center gap-2">
-              <span className="text-base font-semibold text-base-content">
-                {discussion?.author?.name}
-              </span>
+              <Link href={`/@${discussion?.author?.username}`}>
+                <span className="text-base font-semibold text-base-content hover:text-base-content/80 transition-all delay-200">
+                  {discussion?.author?.name}
+                </span>
+              </Link>
               {product.makers.some((id) => id === discussion.userId) ? (
                 <Maker />
               ) : (
@@ -43,10 +48,13 @@ export default function Comment({ discussion, product }) {
             </div>
 
             <p className="mt-2 text-base-content-secondary text-base font-normal whitespace-pre-wrap">
+              {/* display mentions */}
               {discussion.mentions && (
-                <span className="text-primary font-medium">
-                  @{discussion.mentions}
-                </span> //display mentions
+                <Link href={`/@${discussion.mentions}`}>
+                  <span className="text-primary font-medium hover:text-primary/80 transition-all delay-200">
+                    @{discussion.mentions}
+                  </span>{" "}
+                </Link>
               )}
               &nbsp;&nbsp;
               {discussion.content}
