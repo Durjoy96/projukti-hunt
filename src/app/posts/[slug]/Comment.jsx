@@ -1,10 +1,11 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Textarea from "./Textarea";
-import { MessageCircle } from "lucide-react";
+import { Clock, MessageCircle } from "lucide-react";
 import Maker from "@/components/Maker";
 import Hunter from "@/components/Hunter";
 import Link from "next/link";
+import { timeAgo } from "@/lib/timeago";
 
 export default function Comment({ discussion, product }) {
   const [isReplying, setIsReplying] = useState(false);
@@ -60,12 +61,18 @@ export default function Comment({ discussion, product }) {
               {discussion.content}
             </p>
             <div className="mt-3">
-              <button
-                onClick={() => setIsReplying((prev) => !prev)}
-                className="cursor-pointer text-sm font-semibold text-base-content-secondary flex items-center gap-1 hover:text-primary transition-all delay-200"
-              >
-                <MessageCircle className="w-4.5 h-4.5 stroke-[1.5]" /> Reply
-              </button>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setIsReplying((prev) => !prev)}
+                  className="cursor-pointer text-sm font-semibold text-base-content-secondary flex items-center gap-1 hover:text-primary transition-all delay-200"
+                >
+                  <MessageCircle className="w-4.5 h-4.5 stroke-[1.5]" /> Reply
+                </button>
+                <span className="flex items-center gap-1 text-sm font-light text-base-content-secondary">
+                  <Clock className="w-4.5 h-4.5 stroke-[1.5]" />
+                  {timeAgo(discussion.createdAt)}
+                </span>
+              </div>
               {isReplying && (
                 <Textarea
                   product={product}
