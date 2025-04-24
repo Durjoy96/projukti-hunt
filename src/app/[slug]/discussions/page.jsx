@@ -1,7 +1,7 @@
 "use client";
 
-import CardSkeleton from "@/components/CardSkeleton";
 import NoData from "@/components/NoData";
+import { Skeleton } from "@/components/ui/skeleton";
 import { timeAgo } from "@/lib/timeago";
 import axios from "axios";
 import Link from "next/link";
@@ -24,7 +24,13 @@ export default function Discussions() {
     <>
       {!discussions.length && !loading && <NoData />}
       <div className="grid gap-6 mt-8">
-        {loading && <CardSkeleton />}
+        {/* loading skeleton */}
+        {loading && (
+          <div className="grid gap-4">
+            <Skeleton className="h-28 w-full rounded-lg" />
+            <Skeleton className="h-28 w-full rounded-lg" />
+          </div>
+        )}
         {[...discussions].reverse().map((discussion) => (
           <div
             key={discussion._id}
