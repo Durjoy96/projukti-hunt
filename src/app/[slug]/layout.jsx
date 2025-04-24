@@ -1,18 +1,20 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
+import CardSkeleton from "@/components/CardSkeleton";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function Profile({ children }) {
   const { user } = useAuth();
   const { slug } = useParams();
-  const path = window.location.href;
-  const [dbUser, setDbUser] = useState([]);
+  const path = usePathname();
+  const [dbUser, setDbUser] = useState(null);
   const [activeBtn, setActiveBtn] = useState(
     path.includes("products")
       ? "Products"
@@ -31,6 +33,17 @@ export default function Profile({ children }) {
   return (
     <>
       <section className="max-w-4xl mx-auto px-5 mt-12">
+        {/* Loading Skeleton */}
+        {!dbUser && (
+          <Skeleton className="flex items-center flex-col gap-6 bg-base-200 p-6 rounded-lg">
+            <Skeleton className="h-24 w-24 rounded-full" />
+            <div className="flex flex-col gap-2">
+              <Skeleton className="h-6 w-32" />
+              <Skeleton className="h-4 w-20" />
+            </div>
+          </Skeleton>
+        )}
+        {/* Profile Header */}
         {dbUser && (
           <div className="flex items-center flex-col gap-6 bg-base-200 p-6 rounded-lg">
             <Image
