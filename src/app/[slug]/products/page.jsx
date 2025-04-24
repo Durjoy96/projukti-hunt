@@ -14,11 +14,13 @@ import {
 } from "@/components/ui/select";
 import { pusherClient } from "@/lib/pusher";
 import NoData from "@/components/NoData";
+import CardSkeleton from "@/components/CardSkeleton";
 
 export default function Products() {
   const { slug } = useParams();
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const channel = pusherClient.subscribe("votes");
@@ -33,6 +35,7 @@ export default function Products() {
     axios.get(`/api/profile/products?username=${slug}`).then((res) => {
       setProducts(() => res.data);
       setFilter(() => res.data);
+      setLoading(false);
     });
 
     // Cleanup
@@ -64,7 +67,7 @@ export default function Products() {
 
   return (
     <>
-      {!products.length && <NoData />}
+      {!products.length && !loading && <NoData />}
       {products.length > 0 && (
         <div className="flex justify-between items-center mt-8">
           <h3 className="text-lg md:text-xl font-bold text-base-content">
@@ -92,6 +95,7 @@ export default function Products() {
       )}
 
       <div className="max-w-4xl mt-8 grid">
+        {loading && <CardSkeleton />}
         {filter.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}

@@ -1,5 +1,6 @@
 "use client";
 
+import CardSkeleton from "@/components/CardSkeleton";
 import NoData from "@/components/NoData";
 import { timeAgo } from "@/lib/timeago";
 import axios from "axios";
@@ -10,16 +11,20 @@ import React, { useEffect, useState } from "react";
 export default function Discussions() {
   const { slug } = useParams();
   const [discussions, setDiscussions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     axios.get(`/api/profile/discussions?username=${slug}`).then((res) => {
       setDiscussions(() => res.data);
+      setLoading(false);
     });
   }, [slug]);
 
   return (
     <>
-      {!discussions.length && <NoData />}
+      {!discussions.length && !loading && <NoData />}
       <div className="grid gap-6 mt-8">
+        {loading && <CardSkeleton />}
         {[...discussions].reverse().map((discussion) => (
           <div
             key={discussion._id}
