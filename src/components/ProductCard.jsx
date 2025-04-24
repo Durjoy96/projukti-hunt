@@ -9,15 +9,16 @@ export default function ProductCard({ product, idx }) {
   return (
     <>
       <Link href={`/posts/${product.title}`}>
-        <div className="flex gap-4 items-start p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out group">
+        <div className="flex gap-4 items-start py-4 md:p-4 bg-transparent rounded-lg w-full hover:bg-base-200 cursor-pointer transition-all duration-200 ease-in-out group">
           {" "}
-          <div className="w-14 h-14">
+          <div className="w-20 h-16 md:w-16 md:h-14 rounded-lg overflow-hidden">
             <Image
               src={product.logo_url}
-              width={path ? 96 : 48}
-              height={path ? 96 : 48}
+              width={96}
+              height={96}
               alt={product.product_name}
-              className="rounded-lg w-full h-full object-cover"
+              className="rounded-lg w-full h-full object-cover object-center"
+              loading="lazy"
             />
           </div>
           <div className="flex justify-between items-start w-full md:gap-6">
