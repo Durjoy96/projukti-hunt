@@ -1,3 +1,5 @@
+"use client";
+
 import axios from "axios";
 import { Loader2, Triangle } from "lucide-react";
 import React, { useState } from "react";
