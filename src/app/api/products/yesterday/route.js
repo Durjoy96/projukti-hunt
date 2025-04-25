@@ -14,7 +14,7 @@ export async function GET() {
   ).toISOString(); // 12:00 AM UTC yesterday
   const yesterdayEnd = new Date(
     Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate())
-  ).toDateString(); // 12:00 AM UTC today
+  ).toISOString(); // 12:00 AM UTC today
 
   const query = {
     createdAt: {
