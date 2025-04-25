@@ -7,9 +7,11 @@ import Comment from "./Comment";
 import { pusherClient } from "@/lib/pusher";
 import firstCommentIcon from "@/assets/icons/refreshing-beverage.svg";
 import Image from "next/image";
+import DiscussionsSkeleton from "./DiscussionsSkeleton";
 
 export default function Discussions({ product }) {
   const [discussions, setDiscussions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const channel = pusherClient.subscribe("comments");
@@ -37,6 +39,7 @@ export default function Discussions({ product }) {
 
     axios.get(`/api/discussions?id=${product._id}`).then((res) => {
       organizeComments(res.data);
+      setLoading(false);
     });
 
     return () => {
@@ -98,6 +101,7 @@ export default function Discussions({ product }) {
       <div className="mt-12">
         <Textarea product={product} />
       </div>
+      {loading && <DiscussionsSkeleton />}
       {discussions.length > 0 ? (
         <div>
           {discussions.map((discussion) => (
@@ -107,18 +111,20 @@ export default function Discussions({ product }) {
           ))}
         </div>
       ) : (
-        <div className="py-14 md:py-14 bg-base-200 flex justify-center rounded-lg mt-8">
-          <div className="flex flex-col items-center gap-3">
-            <Image
-              src={firstCommentIcon}
-              alt="comment"
-              className="w-12 h-12 md:w-16 md:h-16"
-            />
-            <span className="text-base md:text-lg font-medium text-base-content">
-              Don’t be shy — comment firsts
-            </span>
+        !loading && (
+          <div className="py-14 md:py-14 bg-base-200 flex justify-center rounded-lg mt-8">
+            <div className="flex flex-col items-center gap-3">
+              <Image
+                src={firstCommentIcon}
+                alt="comment"
+                className="w-12 h-12 md:w-16 md:h-16"
+              />
+              <span className="text-base md:text-lg font-medium text-base-content">
+                Don’t be shy — comment firsts
+              </span>
+            </div>
           </div>
-        </div>
+        )
       )}
     </>
   );

@@ -77,7 +77,7 @@ export default function Loading() {
         {/* carousel */}
         <div className="mt-12 flex gap-6">
           <Skeleton className="h-72 w-full rounded-lg" />
-          <Skeleton className="h-72 w-full rounded-lg" />
+          <Skeleton className="h-72 w-full rounded-lg hidden md:inline-block" />
         </div>
       </section>
     </>
