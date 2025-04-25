@@ -39,13 +39,13 @@ export default function Products({ endpoint }) {
 
   return (
     <>
-      <div className="max-w-4xl mt-8 grid">
+      <div className="max-w-4xl mt-6 md:mt-8 grid">
         {/* no products */}
         {products.length === 0 && (
           <div>
             {endpoint === "today" && loading === false && (
               <div>
-                <p className="text-base-content-secondary text-base -mt-6">
+                <p className="text-base-content-secondary text-sm md:text-base -mt-6">
                   No products launched today.
                 </p>
                 <Link href="/posts/new" className="mt-6 inline-block">
@@ -54,17 +54,17 @@ export default function Products({ endpoint }) {
               </div>
             )}
             {endpoint === "yesterday" && loading === false && (
-              <p className="text-base-content-secondary text-base -mt-6">
+              <p className="text-base-content-secondary text-sm md:text-base -mt-6">
                 No products launched yesterday.
               </p>
             )}
             {endpoint === "last-weeks" && loading === false && (
-              <p className="text-base-content-secondary text-base -mt-6">
+              <p className="text-base-content-secondary text-sm md:text-base -mt-6">
                 No products launched last week.
               </p>
             )}
             {endpoint === "last-months" && loading === false && (
-              <p className="text-base-content-secondary text-base -mt-6">
+              <p className="text-base-content-secondary text-sm md:text-base -mt-6">
                 No products launched last month.
               </p>
             )}

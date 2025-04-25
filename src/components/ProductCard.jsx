@@ -24,7 +24,7 @@ export default function ProductCard({ product, idx }) {
           <div className="flex justify-between items-start w-full md:gap-6">
             <div>
               <div className="flex items-center gap-2 group-hover:text-primary">
-                <h3 className="text-base md:text-lg font-medium text-base-content group-hover:text-primary">
+                <h3 className="text-base md:text-lg font-medium text-base-content group-hover:text-primary truncate max-w-[180px] md:max-w-2xl">
                   {!isNaN(idx) && idx + 1 + "."} {product.product_name}
                 </h3>
                 <ExternalLinkIcon
@@ -32,7 +32,7 @@ export default function ProductCard({ product, idx }) {
                   onClick={() => window.open(product.web_app_link, "_blank")}
                 />
               </div>
-              <p className="text-sm md:text-base font-normal text-base-content-secondary truncate max-w-[170px] md:max-w-2xl">
+              <p className="text-sm md:text-base font-normal text-base-content-secondary truncate max-w-[180px] md:max-w-2xl">
                 {product.tagline}
               </p>
               {/* categories */}
