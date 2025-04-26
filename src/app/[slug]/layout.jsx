@@ -66,7 +66,7 @@ export default function Profile({ children }) {
             </div>
           </div>
         )}
-        <div className="mt-12 md:mt-20 flex gap-6">
+        <div className="mt-12 md:mt-20 flex justify-between flex-wrap md:justify-start md:gap-6">
           <Link href={`/${slug.replace("%40", "@")}`}>
             <Button
               variant="outline"
