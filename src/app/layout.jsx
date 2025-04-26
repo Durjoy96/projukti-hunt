@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/shared/Navbar/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/shared/Footer/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
       <body
-        className={`${inter.variable} antialiased font-inter bg-base-100 min-h-screen pb-32`}
+        className={`${inter.variable} antialiased font-inter bg-base-100 min-h-screen`}
       >
         <AuthProvider>
           <header className="sticky top-0 z-50">

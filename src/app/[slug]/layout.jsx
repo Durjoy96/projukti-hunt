@@ -32,7 +32,7 @@ export default function Profile({ children }) {
 
   return (
     <>
-      <section className="max-w-4xl mx-auto px-5 mt-12">
+      <section className="max-w-4xl mx-auto px-5 mt-12 pb-12 md:pb-20 lg:pb-32">
         {/* Loading Skeleton */}
         {!dbUser && (
           <Skeleton className="flex items-center flex-col gap-6 bg-base-200 p-6 rounded-lg">

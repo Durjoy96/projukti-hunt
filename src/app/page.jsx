@@ -1,4 +1,5 @@
 import Products from "@/components/Products";
+import Footer from "@/shared/Footer/Footer";
 
 export default function Home() {
   return (
@@ -31,6 +32,9 @@ export default function Home() {
             Last Month's Top Products
           </h2>
           <Products endpoint="last-months" />
+        </div>
+        <div className="mt-12 md:mt-20 lg:mt-32">
+          <Footer />
         </div>
       </section>
     </>

@@ -71,7 +71,7 @@ export default function ProductDetails() {
   return (
     <>
       {loading && <Loading />}
-      <section className="max-w-5xl mx-auto px-5 mt-12">
+      <section className="max-w-5xl mx-auto px-5 mt-12 pb-12 md:pb-20 lg:pb-32">
         {product && (
           <>
             {/* breadcrumbs */}

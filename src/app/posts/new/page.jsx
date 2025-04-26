@@ -126,7 +126,7 @@ export default function SubmitProduct() {
   };
   return (
     <>
-      <section className="max-w-7xl mx-auto px-5 mt-12 md:mt-20 grid lg:grid-cols-[0.3fr_1fr] gap-12">
+      <section className="max-w-7xl mx-auto px-5 mt-12 md:mt-20 grid lg:grid-cols-[0.3fr_1fr] gap-12 pb-12 md:pb-20 lg:pb-32">
         {/* sidebar */}
         <div className="flex flex-col gap-2">
           <button
