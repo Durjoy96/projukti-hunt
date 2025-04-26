@@ -42,12 +42,12 @@ export default function Loading() {
           {/* categories */}
           <div className="md:flex items-center gap-2 hidden">
             <Skeleton className="h-4 w-20" />
-            <p className="items-center gap-2">
+            <div className="items-center gap-2">
               <span className="flex items-center gap-2">
                 <Skeleton className="h-4 w-20" />{" "}
                 <Skeleton className="h-4 w-20" />
               </span>
-            </p>
+            </div>
           </div>
           {/* product social accounts */}
           <div className="flex items-center gap-4">

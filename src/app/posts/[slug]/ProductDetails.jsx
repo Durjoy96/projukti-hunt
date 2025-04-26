@@ -206,7 +206,8 @@ export default function ProductDetails() {
               )}
             </div>
             {/* carousel */}
-            {(product.banners_url.length > 0 || product.youtube_video_link) && (
+            {((product?.banners_url && product.banners_url.length > 0) ||
+              product.youtube_video_link) && (
               <div className="mt-12">
                 <Carousel product={product} />
               </div>

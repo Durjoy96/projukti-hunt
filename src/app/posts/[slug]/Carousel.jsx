@@ -53,7 +53,8 @@ export default function Carousel({ product }) {
             </div>
           </SwiperSlide>
         )}
-        {product.banners_url.length > 0 &&
+        {product?.banners_url &&
+          product.banners_url.length > 0 &&
           product.banners_url.map((banner, idx) => (
             <SwiperSlide key={idx} className="rounded-lg w-full">
               <Image
