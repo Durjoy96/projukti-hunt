@@ -1,4 +1,3 @@
-import { createAuthCookie } from "@/lib/cookie";
 import { signToken } from "@/lib/jwt";
 import clientPromise from "@/lib/mongodb";
 import { NextResponse } from "next/server";
@@ -10,7 +9,6 @@ export async function POST(req) {
     const user = await req.json();
     const query = { email: user.email };
     const isExist = await db.collection("users").findOne(query);
-    const isProd = process.env.NODE_ENV === "production";
 
     if (isExist) {
       // Generate token for existing user
@@ -19,9 +17,7 @@ export async function POST(req) {
         email: isExist.email,
       });
 
-      await createAuthCookie(token);
-
-      return NextResponse.json({ message: "Login success" });
+      return NextResponse.json({ token, message: "Login success" });
     }
 
     //create new user
@@ -34,9 +30,7 @@ export async function POST(req) {
       email: user.email,
     });
 
-    await createAuthCookie(token);
-
-    return NextResponse.json({ message: "Login success" });
+    return NextResponse.json({ token, message: "Login success" });
   } catch (error) {
     console.error("Database error:", error);
     return NextResponse.json(

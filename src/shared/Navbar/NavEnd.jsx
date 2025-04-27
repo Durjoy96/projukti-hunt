@@ -67,7 +67,13 @@ export default function NavbarEnd() {
                     Profile
                   </DropdownMenuItem>
                 </Link>
-                <DropdownMenuItem className="cursor-pointer" onClick={logout}>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={() => {
+                    logout();
+                    localStorage.removeItem("authToken");
+                  }}
+                >
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>

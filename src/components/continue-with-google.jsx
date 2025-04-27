@@ -19,9 +19,11 @@ export default function ContinueWithGoogle() {
           photo_url: res.user.photoURL,
           creation_time: res.user.metadata.creationTime,
         };
-        axios
-          .post("/api/auth/users", user, { withCredentials: true })
-          .then((res) => console.log(res)); //store user data to the database
+        axios.post("/api/auth/users", user).then((res) => {
+          console.log(res);
+          localStorage.setItem("authToken", res.data.token); //store token to the local storage
+          
+        }); //store user data to the database
       })
       .catch((error) => toast.error(error.message));
   };
