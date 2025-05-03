@@ -1,11 +1,25 @@
+import { checkAuth } from "@/lib/middleware";
 import clientPromise from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
+  const user = await checkAuth(req);
+  if (!user) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  const info = await req.json();
+
+  if (info.hunter !== user.uid) {
+    return NextResponse.json(
+      { error: "Forbidden: user ID mismatch" },
+      { status: 403 }
+    );
+  }
+
   try {
     const client = await clientPromise;
     const db = client.db();
-    const info = await req.json();
     const query = { web_app_link: info.web_app_link };
     const isExist = await db.collection("submissions").findOne(query);
     if (isExist) {

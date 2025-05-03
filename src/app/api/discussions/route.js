@@ -11,7 +11,6 @@ export async function POST(req) {
   }
 
   const comment = await req.json();
-  comment.userId = user.uid;
 
   if (comment.userId !== user.uid) {
     return NextResponse.json(

@@ -11,6 +11,7 @@ import axios from "axios";
 import { useAuth } from "@/components/AuthProvider";
 import toast from "react-hot-toast";
 import SuccessModal from "@/components/SuccessModal";
+import axiosInstance from "@/lib/axios";
 
 export default function SubmitProduct() {
   const { user } = useAuth();
@@ -54,8 +55,8 @@ export default function SubmitProduct() {
 
     //get logo url
     submissionInfo.logo &&
-      (await axios
-        .post("/api/upload-image", { img: submissionInfo.logo })
+      (await axiosInstance
+        .post("/upload-image", { img: submissionInfo.logo })
         .then((res) => {
           console.log(res.data.data.display_url);
           delete submissionInfo.logo;
@@ -68,8 +69,8 @@ export default function SubmitProduct() {
     //banners url
     if (submissionInfo.banners && submissionInfo.banners.length > 0) {
       for (let [index, banner] of submissionInfo.banners.entries()) {
-        await axios
-          .post("/api/upload-image", { img: banner })
+        await axiosInstance
+          .post("/upload-image", { img: banner })
           .then((res) => {
             console.log(res.data);
             if (submissionInfo.banners.length - 1 === index) {
@@ -90,8 +91,8 @@ export default function SubmitProduct() {
     }
 
     // store on the db
-    await axios
-      .post("/api/submissions", submissionInfo)
+    await axiosInstance
+      .post("/submissions", submissionInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data.acknowledged) {

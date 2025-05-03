@@ -11,7 +11,6 @@ export async function POST(req) {
   }
 
   let { productId, userId } = await req.json();
-  userId = user.uid;
 
   if (userId !== user.uid) {
     return NextResponse.json(
