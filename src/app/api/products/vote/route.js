@@ -2,11 +2,24 @@ import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import { pusher } from "@/lib/pusher";
+import { checkAuth } from "@/lib/middleware";
 
 export async function POST(req) {
+  const user = await checkAuth(req);
+  if (!user) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  let { productId, userId } = await req.json();
+  userId = user.uid;
+
+  if (userId !== user.uid) {
+    return NextResponse.json(
+      { error: "Forbidden: user ID mismatch" },
+      { status: 403 }
+    );
+  }
   try {
-    const { productId, userId } = await req.json();
-    console.log(userId);
     const client = await clientPromise;
     const db = client.db();
 

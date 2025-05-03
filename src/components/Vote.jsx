@@ -1,12 +1,12 @@
 "use client";
 
-import axios from "axios";
 import { Loader2, Triangle } from "lucide-react";
 import React, { useState } from "react";
 import { useAuth } from "./AuthProvider";
 import toast from "react-hot-toast";
 import { Button } from "./ui/button";
 import SignInModal from "./sign-in-modal";
+import axiosInstance from "@/lib/axios";
 
 export default function Vote({ product }) {
   const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ export default function Vote({ product }) {
       return;
     }
     try {
-      const response = await axios.post(`/api/products/vote`, {
+      const response = await axiosInstance.post(`/products/vote`, {
         productId,
         userId: user.uid,
       });
