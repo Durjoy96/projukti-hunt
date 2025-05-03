@@ -1,6 +1,6 @@
 import { useAuth } from "@/components/AuthProvider";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
+import axiosInstance from "@/lib/axios";
 import { Check, CircleX, Loader2 } from "lucide-react";
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -46,8 +46,8 @@ export default function Textarea({
       delete commentInfo.mentions;
     }
 
-    axios
-      .post("/api/discussions", commentInfo)
+    axiosInstance
+      .post("/discussions", commentInfo)
       .then(() => {
         setComment(""); //clear textarea
         setLoading("done"); //display done icon

@@ -1,9 +1,16 @@
+import { checkAuth } from "@/lib/middleware";
 import clientPromise from "@/lib/mongodb";
 import { pusher } from "@/lib/pusher";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
+  const user = await checkAuth(req);
+
+  if (!user) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const comment = await req.json();
     const client = await clientPromise;
