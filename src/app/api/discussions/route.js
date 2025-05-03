@@ -6,13 +6,21 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   const user = await checkAuth(req);
-
   if (!user) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
+  const comment = await req.json();
+  comment.userId = user.uid;
+
+  if (comment.userId !== user.uid) {
+    return NextResponse.json(
+      { error: "Forbidden: user ID mismatch" },
+      { status: 403 }
+    );
+  }
+
   try {
-    const comment = await req.json();
     const client = await clientPromise;
     const db = client.db();
     const result = await db.collection("discussions").insertOne(comment);
