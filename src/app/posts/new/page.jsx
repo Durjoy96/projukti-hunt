@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BasicInformation from "./components/BasicInformation";
 import CommunityAndSocialLinks from "./components/CommunityAndSocialLinks";
 import AdditionalFeatures from "./components/AdditionalFeatures";
 import { Button } from "@/components/ui/button";
 import LaunchChecklist from "./components/LaunchChecklist";
 import { CircleCheck, Info, Loader2, MessageCircle, Plus } from "lucide-react";
-import axios from "axios";
 import { useAuth } from "@/components/AuthProvider";
 import toast from "react-hot-toast";
 import SuccessModal from "@/components/SuccessModal";
@@ -37,7 +36,19 @@ export default function SubmitProduct() {
     status: "pending",
     createdAt: new Date().toISOString(),
   });
-  console.log(submissionInfo);
+  // console.log(submissionInfo);
+
+  // check if the user is logged in or not
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      toast.error("Please login to submit a product.");
+      setTimeout(() => {
+        window.location.href = "/"; // redirect to home page
+      }, 2000);
+    }
+  }, []);
+
   const submitBtnHandler = async () => {
     setLoading(true);
     //remove the unnecessary keys
