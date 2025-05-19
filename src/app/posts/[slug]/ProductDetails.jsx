@@ -186,17 +186,23 @@ export default function ProductDetails() {
               {/* hunter details */}
               {hunter && (
                 <div className="flex items-center gap-2">
-                  <Image
-                    src={hunter?.photo_url}
-                    alt={hunter?.name}
-                    width={50}
-                    height={50}
-                    className="rounded-full"
-                  />
+                  <Link href={`/@${hunter.username}`}>
+                    {" "}
+                    <Image
+                      src={hunter?.photo_url}
+                      alt={hunter?.name}
+                      width={50}
+                      height={50}
+                      className="rounded-full"
+                    />
+                  </Link>
+
                   <div className="grid gap-2">
-                    <span className="text-base font-semibold text-base-content">
-                      {hunter?.name}
-                    </span>
+                    <Link href={`/@${hunter.username}`}>
+                      <span className="text-base font-semibold text-base-content hover:text-base-content/80">
+                        {hunter?.name}
+                      </span>
+                    </Link>
                     <div className="flex items-center gap-2">
                       <Hunter />
                       {product.makers.length > 0 && <Maker />}
