@@ -7,10 +7,12 @@ import ProductCard from "./ProductCard";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import CardSkeleton from "./CardSkeleton";
+import { useAuth } from "./AuthProvider";
 
 export default function Products({ endpoint }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
     // Subscribe to Pusher channel
@@ -48,9 +50,22 @@ export default function Products({ endpoint }) {
                 <p className="text-base-content-secondary text-sm md:text-base -mt-6">
                   No products launched today.
                 </p>
-                <Link href="/posts/new" className="mt-6 inline-block">
-                  <Button>Launch a Product</Button>
-                </Link>
+                <div className="mt-6">
+                  {!user && (
+                    <Button
+                      onClick={() =>
+                        document.getElementById("sign_in_modal").showModal()
+                      }
+                    >
+                      Launch a Product
+                    </Button>
+                  )}
+                  {user && (
+                    <Link href="/posts/new">
+                      <Button>Launch a Product</Button>
+                    </Link>
+                  )}
+                </div>
               </div>
             )}
             {endpoint === "yesterday" && loading === false && (
