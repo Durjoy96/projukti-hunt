@@ -127,7 +127,11 @@ JWT_SECRET=YOUR_JWT_SECRET
 
 **4️⃣ Start the Development Server**
 Run the following command to start the development server:
-`sh npm run dev `
+
+```sh
+npm run dev
+```
+
 The application will be available at http://localhost:3000/.
 
 ## 🛠️ Troubleshooting
