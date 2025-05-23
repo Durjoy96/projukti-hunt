@@ -92,21 +92,17 @@ Ensure you have the following installed before proceeding:
 **1️⃣ Clone the Repository**
 Open your terminal and run the following command:
 
-```json
-{
-
-    "git clone https://github.com/your-username/projukti-hunt.git"
-}
+```sh
+git clone https://github.com/Durjoy96/projukti-hunt.git
 ```
 
 **2️⃣ Install Dependencies**
 Navigate to the project directory and install the required npm packages:
 
-```json
-{
+```sh
 
-    "npm install"
-}
+    npm install
+
 ```
 
 **3️⃣ Set Up Environment Variables**
