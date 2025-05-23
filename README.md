@@ -20,7 +20,8 @@ A platform to discover, showcase, and upvote Bangladeshi tech products. Built wi
 
 - React
 - Tailwind CSS
-- Radix UI
+- DaisyUi
+- Shadchan
 
 ### **Backend**
 
@@ -79,7 +80,7 @@ A platform to discover, showcase, and upvote Bangladeshi tech products. Built wi
 
 Follow these steps to set up and run Projukti Hunt locally on your machine.
 
-### 🛠️ Prerequisites
+### Prerequisites
 
 Ensure you have the following installed before proceeding:
 
@@ -100,39 +101,33 @@ git clone https://github.com/Durjoy96/projukti-hunt.git
 Navigate to the project directory and install the required npm packages:
 
 ```sh
-
-    npm install
-
+npm install
 ```
 
 **3️⃣ Set Up Environment Variables**
 Create a .env file in the root directory and add the following keys:
 
-```json
-{
-"
-NEXT_PUBLIC_apiKey
-NEXT_PUBLIC_authDomain
-NEXT_PUBLIC_projectId
-NEXT_PUBLIC_storageBucket
-NEXT_PUBLIC_messagingSenderId
-NEXT_PUBLIC_appId
-NEXT_PUBLIC_measurementId
-MONGO_URI
-IMGBB_API_KEY
-NEXT_PUBLIC_PUSHER_APP_ID
-NEXT_PUBLIC_PUSHER_KEY
-PUSHER_SECRET
-NEXT_PUBLIC_PUSHER_CLUSTER
-CRON_SECRET
-JWT_SECRET"
-}
-
+```sh
+NEXT_PUBLIC_apiKey=YOUR_FIREBASE_API_KEY
+NEXT_PUBLIC_authDomain=YOUR_FIREBASE_AUTH_DOMAIN
+NEXT_PUBLIC_projectId=YOUR_FIREBASE_PROJECT_ID
+NEXT_PUBLIC_storageBucket=YOUR_FIREBASE_STORAGE_BUCKET
+NEXT_PUBLIC_messagingSenderId=YOUR_FIREBASE_MESSAGING_SENDER_ID
+NEXT_PUBLIC_appId=YOUR_FIREBASE_APP_ID
+NEXT_PUBLIC_measurementId=YOUR_FIREBASE_MEASUREMENT_ID
+MONGO_URI=YOUR_MONGODB_CONNECTION_STRING
+IMGBB_API_KEY=YOUR_IMGBB_API_KEY
+NEXT_PUBLIC_PUSHER_APP_ID=YOUR_PUSHER_APP_ID
+NEXT_PUBLIC_PUSHER_KEY=YOUR_PUSHER_KEY
+PUSHER_SECRET=YOUR_PUSHER_SECRET
+NEXT_PUBLIC_PUSHER_CLUSTER=YOUR_PUSHER_CLUSTER
+CRON_SECRET=YOUR_CRON_SECRET
+JWT_SECRET=YOUR_JWT_SECRET
 ```
 
 **4️⃣ Start the Development Server**
 Run the following command to start the development server:
-`json {"npm run dev"}`
+`sh npm run dev `
 The application will be available at http://localhost:3000/.
 
 ## 🛠️ Troubleshooting
