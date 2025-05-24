@@ -22,6 +22,7 @@ export default function Vote({ product }) {
     // Check if user is logged in
     if (!user) {
       document.getElementById("sign_in_modal").showModal();
+      setLoading(false);
       return;
     }
     try {
